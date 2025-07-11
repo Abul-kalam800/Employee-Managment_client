@@ -1,6 +1,6 @@
 import React from "react";
 import { Outlet } from "react-router";
-import Navbar from "../sheard/Navbar";
+import Navbar from "../sheard/Header";
 import Footer from "../sheard/Footer";
 
 const MainLayout = () => {
