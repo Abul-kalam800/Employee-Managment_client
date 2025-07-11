@@ -1,11 +1,12 @@
 import React from "react";
-import Banner from '../Home/Banner.jsx';
-
+import Banner from "../Home/Banner.jsx";
+import Services from "./Services.jsx";
 
 const HomePage = () => {
   return (
     <div>
-<Banner></Banner>
+      <Banner></Banner>
+      <Services></Services>
     </div>
   );
 };
