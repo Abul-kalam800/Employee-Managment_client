@@ -1,11 +1,13 @@
-import React from 'react';
+import React from "react";
+import Banner from '../Home/Banner.jsx';
+
 
 const HomePage = () => {
-    return (
-        <div>
-          <h1>homepage</h1>  
-        </div>
-    );
+  return (
+    <div>
+<Banner></Banner>
+    </div>
+  );
 };
 
 export default HomePage;

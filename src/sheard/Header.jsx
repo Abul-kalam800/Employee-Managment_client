@@ -10,7 +10,7 @@ const Header = () => {
   };
  
   return (
-    <header className="p-4 dark:bg-gray-100 dark:text-gray-800">
+    <header className="p-4 bg-gray-200 text-gray-800 shadow-2xl">
       <div className="container flex justify-between h-16 mx-auto">
         <NavLink
           rel="noopener noreferrer"
@@ -18,7 +18,7 @@ const Header = () => {
           aria-label="Back to homepage"
           className="flex items-center p-2"
         >
-          <img src={logo} alt="logo" className="w-[150px]" />
+          <img src={logo} alt="logo" className=" w-26 lg:w-[150px]" />
         </NavLink>
         <ul className="items-stretch hidden space-x-3 lg:flex">
           <li className="flex">
