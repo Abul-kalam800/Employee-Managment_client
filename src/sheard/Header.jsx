@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import logo from "../../src/assets/logo.png";
-import { NavLink } from "react-router";
-import '../index.css'
+import { Link, NavLink } from "react-router";
+import "../index.css";
 
 const Header = () => {
   const [open, setOpen] = useState(false);
   const handleManu = () => {
     setOpen(!open);
   };
- 
+
   return (
     <header className="p-4 bg-gray-200 text-gray-800 shadow-2xl">
       <div className="container flex justify-between h-16 mx-auto">
@@ -33,18 +33,19 @@ const Header = () => {
           </li>
         </ul>
         <div className="items-center flex-shrink-0 hidden lg:flex gap-5">
-          <button
-            className="self-center px-8 py-3 rounded hover:bg-[#00CC33]"
+          <Link
+            to="/login"
+            className="self-center px-8 py-3 rounded btn  hover:bg-[#00CC33]"
             fdprocessedid="5all7o"
           >
-            Sign in
-          </button>
-          <button
+            Login
+          </Link>
+          <Link to='/register'
             className="self-center px-8 py-3 font-semibold rounded bg-[#6600CC] hover:bg-[#00CC33] cursor-pointer"
             fdprocessedid="bz1a8i"
           >
             Register
-          </button>
+          </Link>
         </div>
         <button onClick={handleManu} className="p-4 lg:hidden relative">
           <svg
@@ -70,15 +71,15 @@ const Header = () => {
                   Dashboard
                 </NavLink>
               </li>
-               <li className="flex">
-            <NavLink to="/" className="flex items-center px-4 ">
-              Contact us
-            </NavLink>
-          </li>
+              <li className="flex">
+                <NavLink to="/" className="flex items-center px-4 ">
+                  Contact us
+                </NavLink>
+              </li>
             </ul>
           </>
         ) : (
-         " "
+          " "
         )}
       </div>
     </header>
