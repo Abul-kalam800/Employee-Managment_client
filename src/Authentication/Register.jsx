@@ -1,8 +1,15 @@
-import React from "react";
+import React, { use, useState } from "react";
 import { Form, useForm } from "react-hook-form";
 import { Link } from "react-router";
+import useAuth from "../Hook/useAuth";
+import axios from "axios";
+
+
+
 
 const Register = () => {
+const {creatUser} =useAuth();
+const [profilePic,setProfilePic]=useState()
   const {
     register,
 
@@ -11,8 +18,39 @@ const Register = () => {
   } = useForm();
 
   const onSubmit = (data) => {
+    const email = data.email;
+    const password = data.password;
+    creatUser(email,password)
+    .then(result=>{
+      console.log(result.user)
+    }).catch(error=>{
+      console.log(error.message)
+    })
     console.log(data);
   };
+
+  const uploadImagehandle = async (e)=>{
+    const image= e.target.files[0]
+    console.log(image)
+
+    const formData = new FormData()
+    formData.append('image',image)
+    const imgeLoadUrl = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMG_SECERT_KEY}`;
+    try{
+      const res= await axios.post(imgeLoadUrl,formData)
+      console.log(res.data)
+      if(res.data.success){
+        const imgUrl = res.data.data.url;
+        console.log(imgUrl)
+      }
+
+    }catch(error){
+      console.log(
+        'Image uploade is failed',error.message)
+
+    }
+
+  }
 
   return (
     <div className="w-full max-w-md p-8 space-y-3 rounded-xl dark:bg-gray-50 dark:text-gray-800 mx-auto my-20">
@@ -25,7 +63,7 @@ const Register = () => {
           <input
             placeholder="Name"
             type="text"
-            className="w-full px-4 py-3 rounded-md dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800 focus:dark:border-violet-600"
+            className=" w-full px-4 py-3 rounded-md border-2 border-gray-300 dark:bg-gray-50 dark:text-gray-800 focus:dark:border-violet-600"
             {...register("name", { required: "name is required" })}
           />
           {errors.name && <p className="text-red-600">{errors.name.message}</p>}
@@ -37,7 +75,7 @@ const Register = () => {
           <input
             placeholder="Account number"
             type="Number"
-            className="w-full px-4 py-3 rounded-md dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800 focus:dark:border-violet-600"
+            className="border-2 w-full px-4 py-3 rounded-md dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800 focus:dark:border-violet-600"
             {...register("Account", { required: true })}
           />
           {errors.Account && (
@@ -49,33 +87,56 @@ const Register = () => {
             Salary
           </label>
           <input
-            placeholder="Salry"
+            placeholder="Salary"
             type="number"
-            className="w-full px-4 py-3 rounded-md dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800 focus:dark:border-violet-600"
-            {...register("salary", { require: true })}
+            className="border-2 w-full px-4 py-3 rounded-md dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800 focus:dark:border-violet-600"
+            {...register("Salary", { required: true })}
           />
+           {errors.Salary && (
+            <p className="text-red-600">Salary is required</p>
+          )}
         </div>
         <div className="space-y-1 text-sm">
           <label htmlFor="username" className="block dark:text-gray-600">
             Photo
           </label>
           <input
-            placeholder="Photo"
-            type="Photo"
-            className="w-full px-4 py-3 rounded-md dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800 focus:dark:border-violet-600"
-            {...register("photo", { require: true })}
+            placeholder="Upload your photo"
+            type="file"
+            className="border-2 w-full px-4 py-3 rounded-md dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800 focus:dark:border-violet-600"
+         onChange={uploadImagehandle}
           />
+       
         </div>
         <div className="space-y-1 text-sm">
           <label htmlFor="username" className="block dark:text-gray-600">
-            Desiganation
+         Role
           </label>
-          <select className="w-full px-2 ">
+          <select className="border-2 w-full px-2 "
+            {...register('Role',{required: true})}
+          
+          >
+           
             <option value="Employee">Employee</option>
             <option value="HR">HR</option>
           
           </select>
-  
+           {errors.Role && (
+            <p className="text-red-600">Role is required</p>
+          )}
+        </div>
+
+        <div className="space-y-1 text-sm">
+          <label htmlFor="username" className="block dark:text-gray-600">
+           Desigation
+          </label>
+          <input
+            type="text"
+            placeholder="Desigation"
+            className="border-2 w-full px-4 py-3 rounded-md dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800 focus:dark:border-violet-600"
+            {...register("Desigation", { required: true })}
+          />
+          {errors.Desigation && <p className="text-red-500">Desigation is required</p>}
         </div>
         <div className="space-y-1 text-sm">
           <label htmlFor="username" className="block dark:text-gray-600">
@@ -84,10 +145,10 @@ const Register = () => {
           <input
             type="email"
             placeholder="Email"
-            className="w-full px-4 py-3 rounded-md dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800 focus:dark:border-violet-600"
+            className="border-2 w-full px-4 py-3 rounded-md dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800 focus:dark:border-violet-600"
             {...register("email", { required: true })}
           />
-          {errors.email && <p className="text-red-500">{errors.mail.message}</p>}
+          {errors.email && <p className="text-red-500">Email is required</p>}
         </div>
         <div className="space-y-1 text-sm">
           <label htmlFor="password" className="block dark:text-gray-600">
@@ -96,17 +157,19 @@ const Register = () => {
           <input
             placeholder="Password"
             type="password"
-            className="w-full px-4 py-3 rounded-md dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800 focus:dark:border-violet-600"
+            className="border-2 w-full px-4 py-3 rounded-md dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800 focus:dark:border-violet-600"
             {...register("password", {
               required: "Password is required",
               minLength: {
                 value: 6,
                 message: "Password must be at least 6 characters",
               },
-              pattern: {
-                value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{6,}$/,
-                message:
-                  "Password must contain upper, lower, number & special character",
+               validate: {
+                hasUppercase: (value) =>
+                  /[A-Z]/.test(value) || `Don't have Capital letter`,
+                hasSpecialChar: (value) =>
+                  /[!@#$%^&*(),.?":{}|<>_\-]/.test(value) ||
+                  `Don't have a special character`,
               },
             })}
           />
