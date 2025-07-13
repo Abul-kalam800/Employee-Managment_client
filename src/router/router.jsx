@@ -3,6 +3,9 @@ import MainLayout from "../Layouts/MainLayout";
 import HomePage from "../Pages/Home/HomePage";
 import Login from "../Authentication/Login";
 import Register from "../Authentication/Register";
+import Dashboard from "../Layouts/Dashboard";
+import WorkSheet from "../Dashboard/WorkSheet";
+import EmployeeList from "../Dashboard/EmployeeList";
 
 export const router = createBrowserRouter([
   {
@@ -24,4 +27,18 @@ export const router = createBrowserRouter([
 
     ],
   },
+  {
+    path:'/dashboard',
+    Component:Dashboard,
+    children:[{
+      path:'work-sheet',
+      Component:WorkSheet,
+
+    },{
+      path:'employeeList',
+      Component:EmployeeList
+    }
+
+    ]
+  }
 ]);

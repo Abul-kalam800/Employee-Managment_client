@@ -38,7 +38,7 @@ const Header = () => {
         </NavLink>
         <ul className="items-stretch hidden space-x-3 lg:flex">
           <li className="flex">
-            <NavLink to="/" className="flex items-center px-4 -mb-1">
+            <NavLink to="/dashboard" className="flex items-center px-4 -mb-1">
               Dashboard
             </NavLink>
           </li>
@@ -100,7 +100,7 @@ const Header = () => {
           <>
             <ul className="absolute top-20 right-0 ">
               <li>
-                <NavLink to="/" className="flex items-center px-4 mb-4">
+                <NavLink to="/dashboard" className="flex items-center px-4 mb-4">
                   Dashboard
                 </NavLink>
               </li>
