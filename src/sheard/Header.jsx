@@ -2,16 +2,32 @@ import React, { useState } from "react";
 import logo from "../../src/assets/logo.png";
 import { Link, NavLink } from "react-router";
 import "../index.css";
+import useAuth from "../Hook/useAuth";
 
 const Header = () => {
+  const { user, logOut } = useAuth();
   const [open, setOpen] = useState(false);
+  const [logopen, setLogopen] = useState(false);
   const handleManu = () => {
     setOpen(!open);
   };
+  const handlePhoto = () => {
+    setLogopen(!logopen);
+  };
+  const hanldeLogout = () => {
+    logOut()
+    .then(() => {
+      console.log("log-out successfully");
+      setLogopen(false)
+    })
+    .catch(error=>{
+      console.log(error.message)
+    });
+  };
 
   return (
-    <header className="p-4 bg-gray-200 text-gray-800 shadow-2xl">
-      <div className="container flex justify-between h-16 mx-auto">
+    <header className="p-2 bg-gray-200 text-gray-800 shadow-2xl">
+      <div className="container flex justify-between h-12 mx-auto">
         <NavLink
           rel="noopener noreferrer"
           href="#"
@@ -32,21 +48,38 @@ const Header = () => {
             </NavLink>
           </li>
         </ul>
-        <div className="items-center flex-shrink-0 hidden lg:flex gap-5">
-          <Link
-            to="/login"
-            className="self-center px-8 py-3 rounded btn  hover:bg-[#00CC33]"
-            fdprocessedid="5all7o"
-          >
-            Login
-          </Link>
-          <Link to='/register'
-            className="self-center px-8 py-3 font-semibold rounded bg-[#6600CC] hover:bg-[#00CC33] cursor-pointer"
-            fdprocessedid="bz1a8i"
-          >
-            Register
-          </Link>
+        <div className="">
+        {user ? (<>
+       
+            <img src={user.photoURL}  className="w-12 h-12 rounded-full cursor-pointer relative" onClick={handlePhoto}/>
+      
+        {
+          logopen? 
+          <button onClick={hanldeLogout} className="cursor-pointer btn bg-[#6600cc] px-4 py-2 text-white absolute top-16 right-10 duration-300 translate-x-2 transition -translate-y-1 ease-in-out">Log-out</button>:''
+        }
+          </>
+        ) : (
+          <>
+            <div className="items-center flex-shrink-0 hidden lg:flex gap-5">
+              <Link
+                to="/login"
+                className="self-center px-8 py-3 rounded btn  hover:bg-[#00CC33]"
+                fdprocessedid="5all7o"
+              >
+                Login
+              </Link>
+              <Link
+                to="/register"
+                className="self-center px-8 py-3 font-semibold rounded bg-[#6600CC] hover:bg-[#00CC33] cursor-pointer"
+                fdprocessedid="bz1a8i"
+              >
+                Register
+              </Link>
+            </div>
+          </>
+        )}
         </div>
+
         <button onClick={handleManu} className="p-4 lg:hidden relative">
           <svg
             xmlns="http://www.w3.org/2000/svg"

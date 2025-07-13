@@ -8,7 +8,7 @@ import Swal from "sweetalert2";
 import { FcGoogle } from "react-icons/fc";
 
 const Register = () => {
-  const { creatUser } = useAuth();
+  const { creatUser, userProfile} = useAuth();
   const [profilePic, setProfilePic] = useState();
   const axioesInstance = useAxios();
   const {
@@ -24,6 +24,18 @@ const Register = () => {
     creatUser(email, password)
       .then(async (result) => {
         console.log(result.user);
+       const profileUpdate = {
+       displayName:data.name,
+        photoURL:profilePic
+       }
+        userProfile(profileUpdate)
+        .then(()=>{
+          console.log('profile update')
+        })
+        .catch(error=>{
+          console.log(error)
+        })
+        
         // user info
         const userInfo = {
           email,
