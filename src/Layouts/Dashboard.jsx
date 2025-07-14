@@ -16,6 +16,7 @@ import {
   HiChartPie,
   HiClipboard,
   HiCollection,
+  HiHome,
   HiInformationCircle,
   HiLogin,
   HiPencil,
@@ -24,48 +25,45 @@ import {
   HiUsers,
 } from "react-icons/hi";
 import { Outlet } from "react-router";
+import Logo from "../Componets/Logo";
 
-const Dashboard = ({childern}) => {
+const Dashboard = ({ childern }) => {
   const [isOpen, setIsOpen] = useState(true);
 
   const handleClose = () => setIsOpen(false);
 
   return (
     <>
-      <div className="flex min-h-10 items-center justify-center bg-blue-500">
-        <Button onClick={() => setIsOpen(!isOpen)}>Show navigation</Button>
-      </div>
+     
+     <div className="max-w-7xl mx-auto">
+     <div className="flex justify-between items-center">
+       <Logo></Logo>
+        <Button onClick={() => setIsOpen(!isOpen)} className="btn bg-[#3366cc]">Manu</Button>
+     </div>
+    
+       <Outlet></Outlet>
+     </div>
       <Drawer open={isOpen} onClose={handleClose}>
         <DrawerHeader title="MENU" titleIcon={() => <></>} />
         <DrawerItems>
-          <Sidebar
-            aria-label="Sidebar with multi-level dropdown example"
-            className="[&>div]:bg-transparent [&>div]:p-0"
-          >
+          <Sidebar aria-label="Sidebar with multi-level dropdown example">
             <div className="flex h-full justify-between gap-20">
-              <div  className="flex h-full flex-col justify-between py-2">
-                <form className="pb-3 md:hidden">
-                  <TextInput
-                    icon={HiSearch}
-                    type="search"
-                    placeholder="Search"
-                    required
-                    size={32}
-                  />
-                </form>
+              <div className="flex h-full flex-col justify-between py-2">
+              
                 <SidebarItems>
                   <SidebarItemGroup>
-                    <SidebarItem href="/" icon={HiChartPie}>
-                      Dashboard
+                    <SidebarItem href="/" icon={HiHome}>
+                      Home
                     </SidebarItem>
                     <SidebarItem
                       href="/dashboard/work-sheet"
                       icon={HiShoppingBag}
                     >
-                      Work-sheet
+                     Employee-Work-sheet
                     </SidebarItem>
                     <SidebarItem href="/dashboard/employeeList" icon={HiUsers}>
-                      Employee-List  </SidebarItem>
+                      Employee-List{" "}
+                    </SidebarItem>
                     <SidebarItem href="/authentication/sign-in" icon={HiLogin}>
                       Sign in
                     </SidebarItem>
@@ -96,11 +94,8 @@ const Dashboard = ({childern}) => {
                 </SidebarItems>
               </div>
 
-              <div className="flex-1 p-2 overflow-auto">
-              
-                 <Outlet>
-                    <childern></childern>
-                 </Outlet>
+              <div className="flex p-2">
+                <Outlet></Outlet>
               </div>
             </div>
           </Sidebar>

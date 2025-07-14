@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import logo from "../../src/assets/logo.png";
+
 import { Link, NavLink } from "react-router";
 import "../index.css";
 import useAuth from "../Hook/useAuth";
+import Logo from "../Componets/Logo";
 
 const Header = () => {
   const { user, logOut } = useAuth();
@@ -28,14 +29,9 @@ const Header = () => {
   return (
     <header className="p-2 bg-gray-200 text-gray-800 shadow-2xl">
       <div className="container flex justify-between h-12 mx-auto">
-        <NavLink
-          rel="noopener noreferrer"
-          href="#"
-          aria-label="Back to homepage"
-          className="flex items-center p-2"
-        >
-          <img src={logo} alt="logo" className=" w-26 lg:w-[150px]" />
-        </NavLink>
+    
+         <Logo></Logo>
+ 
         <ul className="items-stretch hidden space-x-3 lg:flex">
           <li className="flex">
             <NavLink to="/dashboard" className="flex items-center px-4 -mb-1">

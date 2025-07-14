@@ -7,11 +7,15 @@ import { RouterProvider } from "react-router";
 import MainLayout from "./Layouts/MainLayout.jsx";
 import { router } from "./router/router.jsx";
 import Authprovider from "./Provider/Authprovider.jsx";
+import { QueryClientProvider } from "@tanstack/react-query";
+import { queryClient } from "./Dashboard/WorkSheet.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <Authprovider>
-      <RouterProvider router={router}></RouterProvider>
+     <QueryClientProvider client={queryClient}>
+       <RouterProvider router={router}></RouterProvider>
+     </QueryClientProvider>
     </Authprovider>
   </StrictMode>
 );
