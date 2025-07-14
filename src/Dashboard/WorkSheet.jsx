@@ -1,29 +1,35 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import useAxios from "../Hook/useAxios";
 import { useMutation, QueryClient, useQuery } from "@tanstack/react-query";
 import useAuth from "../Hook/useAuth";
-
+import Swal from "sweetalert2";
+import { FaEdit } from "react-icons/fa";
+import { MdDeleteForever } from "react-icons/md";
 export const queryClient = new QueryClient();
+
 const WorkSheet = () => {
   const [date, setDate] = useState(new Date());
   const [hoursWorked, setHoursWorked] = useState("");
   const [task, setTask] = useState("Sales");
   const axioesInstance = useAxios();
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
+  const [editingWork, setEditingWork] = useState(null);
 
-  //   fetch data
-  const { data: works = [], isLoading } = useQuery({
-    queryKey: ["employee", user.email],
+  //   get data
+  const {
+    data: works = [],
+    isLoading,
+    refetch,
+  } = useQuery({
+    queryKey: ["employee", user?.email], // ✅ Use email as key
+    enabled: !!user?.email && !loading, // ✅ Fetch only after user is loaded
     queryFn: async () => {
       const res = await axioesInstance.get(`/employee?email=${user.email}`);
-      console.log(res.data);
       return res.data;
     },
-    enabled: !!user.email,
   });
-
   // add data
 
   const addWorkMutation = useMutation({
@@ -31,26 +37,95 @@ const WorkSheet = () => {
       return await axioesInstance.post("/employee", newWork);
     },
     onSuccess: (res, variables) => {
-      queryClient.setQueryData(["employeeWork", user.email], (old) => [
+      queryClient.setQueryData(["employee", user?.email], (old) => [
         { _id: res.data.insertedId, ...variables },
         ...(old || []),
       ]);
       setHoursWorked("");
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Your work has been saved",
+        showConfirmButton: false,
+        timer: 1500,
+      });
     },
   });
-
+  // add data handle
   const handleSubmit = () => {
     const newWork = {
       task,
       hoursWorked: parseFloat(hoursWorked),
       date: date.toISOString(),
-      employeeEmail: user.email,
+      employeeEmail: user?.email,
     };
     addWorkMutation.mutate(newWork);
   };
+  // handle delet
+  const deleteMutation = useMutation({
+    mutationFn: async (id) => {
+      return await axioesInstance.delete(`/emplyee/${id}`);
+    },
+    onSuccess: (_, id) => {
+      Swal.fire({
+        icon: "error",
+        title: "Error!",
+        text: "Failed to delete the work entry.",
+      });
+      queryClient.setQueryData(["emplyee", user.email], (old) =>
+        old.filter((work) => work._id !== id)
+      );
+    },
+    onError: (_, id) => {
+      Swal.fire({
+        icon: "success",
+        title: "Deleted!",
+        text: "Employee work entry has been deleted.",
+        timer: 2000,
+        showConfirmButton: false,
+      });
+      refetch();
+    },
+  });
+
+  // Update Work Mutation
+  const updateMutation = useMutation({
+    mutationFn: async ({ id, updatedWork }) => {
+      return await axioesInstance.patch(`/emplyee/${id}`, updatedWork);
+    },
+    onSuccess: () => {
+    // ✅ Show SweetAlert on Success
+    Swal.fire({
+      icon: 'success',
+      title: 'Updated!',
+      text: 'Employee work entry updated successfully.',
+      timer: 2000,
+      showConfirmButton: false,
+    });
+    refetch();
+
+    // ✅ Refetch or update your table data
+    queryClient.invalidateQueries({ queryKey: ['emplyee'] });
+  },
+
+  onError: () => {
+    Swal.fire({
+      icon: 'error',
+      title: 'Update Failed',
+      text: 'Something went wrong during update.',
+    });
+  },
+  });
+
+  if (loading || !user) return <p>Loading user...</p>;
+
+  if (isLoading) return <p>Loading employee works...</p>;
+
+  console.log(user.email);
+
   return (
-    <div>
-      <div className="flex items-center gap-2 mb-4">
+    <div className="p-4 max-w-6xl mx-auto">
+      <div className="flex flex-col md:flex-row items-center gap-4 mb-6">
         <select
           value={task}
           onChange={(e) => setTask(e.target.value)}
@@ -67,11 +142,13 @@ const WorkSheet = () => {
           value={hoursWorked}
           onChange={(e) => setHoursWorked(e.target.value)}
           className="border px-2 py-1 rounded w-24"
+          required
         />
         <DatePicker
           selected={date}
           onChange={(date) => setDate(date)}
           className="border px-2 py-1 rounded"
+          required
         />
         <button
           onClick={handleSubmit}
@@ -82,41 +159,102 @@ const WorkSheet = () => {
       </div>
 
       {/* Table */}
-      <table className="w-full table-auto border">
-        <thead>
-          <tr className="bg-gray-200">
-            <th className="p-2 border">Task</th>
-            <th className="p-2 border">Hours Worked</th>
-            <th className="p-2 border">Date</th>
-            <th className="p-2 border">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {works.map((work) => (
-            <tr key={work._id}>
-              <td className="p-2 border">{work.task}</td>
-              <td className="p-2 border">{work.hoursWorked}</td>
-              <td className="p-2 border">
-                {new Date(work.date).toLocaleDateString()}
-              </td>
-              <td className="p-2 border flex items-center justify-center gap-2">
-                <button
-                  onClick={() => setEditingWork(work)}
-                  className="text-yellow-600"
-                >
-                  <FaEdit />
-                </button>
-                <button
-                  onClick={() => deleteMutation.mutate(work._id)}
-                  className="text-red-600"
-                >
-                  <FaTrash />
-                </button>
-              </td>
+      <div className="overflow-x-auto">
+        <table className="w-full table-auto border">
+          <thead>
+            <tr className="bg-gray-200">
+              <th className="p-2 border">Task</th>
+              <th className="p-2 border">Hours Worked</th>
+              <th className="p-2 border">Date</th>
+              <th className="p-2 border">Actions</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {works.map((work) => (
+              <tr key={work._id}>
+                <td className="p-2 border">{work.task}</td>
+                <td className="p-2 border">{work.hoursWorked}</td>
+                <td className="p-2 border">
+                  {new Date(work.date).toLocaleDateString()}
+                </td>
+                <td className="p-2 border flex items-center justify-center gap-2">
+                  <button
+                    onClick={() => setEditingWork(work)}
+                    className="text-black bg-green-500 p-2 rounded-full cursor-pointer"
+                  >
+                    <FaEdit />
+                  </button>
+                  <button
+                    onClick={() => deleteMutation.mutate(work._id)}
+                    className="text-black bg-red-500 p-2 rounded-full cursor-pointer"
+                  >
+                    <MdDeleteForever />
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        {/* Edit Modal */}
+        {editingWork && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+            <div className="bg-white p-4 rounded w-80">
+              <h2 className="text-xl font-semibold mb-2">Edit Work</h2>
+              <select
+                value={editingWork.task}
+                onChange={(e) =>
+                  setEditingWork({ ...editingWork, task: e.target.value })
+                }
+                className="border px-2 py-1 rounded w-full mb-2"
+              >
+                <option>Sales</option>
+                <option>Support</option>
+                <option>Content</option>
+                <option>Paper-work</option>
+              </select>
+              <input
+                type="number"
+                value={editingWork.hoursWorked}
+                onChange={(e) =>
+                  setEditingWork({
+                    ...editingWork,
+                    hoursWorked: e.target.value,
+                  })
+                }
+                className="border px-2 py-1 rounded w-full mb-2"
+              />
+              <DatePicker
+                selected={new Date(editingWork.date)}
+                onChange={(date) => setEditingWork({ ...editingWork, date })}
+                className="border px-2 py-1 rounded w-full mb-2"
+              />
+              <div className="flex justify-between">
+                <button
+                  onClick={() =>
+                    updateMutation.mutate({
+                      id: editingWork._id,
+                      updatedWork: {
+                        task: editingWork.task,
+                        hoursWorked: parseFloat(editingWork.hoursWorked),
+                        date: new Date(editingWork.date).toISOString(),
+                      },
+                    })
+                  }
+                  className="bg-green-500 text-white px-3 py-1 rounded"
+                >
+                  {updateMutation.isPending ? "Updating..." : "Update"}
+                </button>
+                <button
+                  onClick={() => setEditingWork(null)}
+                  className="bg-gray-500 text-white px-3 py-1 rounded"
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

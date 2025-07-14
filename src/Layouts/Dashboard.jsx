@@ -26,9 +26,11 @@ import {
 } from "react-icons/hi";
 import { Outlet } from "react-router";
 import Logo from "../Componets/Logo";
+import useAuth from "../Hook/useAuth";
 
 const Dashboard = ({ childern }) => {
   const [isOpen, setIsOpen] = useState(true);
+  const {user}=useAuth();
 
   const handleClose = () => setIsOpen(false);
 
@@ -56,7 +58,7 @@ const Dashboard = ({ childern }) => {
                       Home
                     </SidebarItem>
                     <SidebarItem
-                      href="/dashboard/work-sheet"
+                      href={`/dashboard/work-sheet`}
                       icon={HiShoppingBag}
                     >
                      Employee-Work-sheet
