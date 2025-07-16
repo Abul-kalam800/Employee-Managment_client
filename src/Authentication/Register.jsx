@@ -39,11 +39,13 @@ const Register = () => {
         // user info
         const userInfo = {
           email,
+          name:data.name,
           bank_account: data.Account,
           salary: data.Salary,
           role: data.Role,
           Desiganition: data.Desiganition,
           photo: profilePic,
+          isVarified:false,
         };
         console.log(userInfo);
         const userRes = await axioesInstance.post("/users", userInfo);

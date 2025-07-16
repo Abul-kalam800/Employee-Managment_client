@@ -22,6 +22,7 @@ import {
   HiPencil,
   HiSearch,
   HiShoppingBag,
+  HiUser,
   HiUsers,
 } from "react-icons/hi";
 import { Outlet } from "react-router";
@@ -59,18 +60,12 @@ const Dashboard = ({ childern }) => {
                     </SidebarItem>
                     <SidebarItem
                       href={`/dashboard/work-sheet`}
-                      icon={HiShoppingBag}
+                      icon={HiUser}
                     >
                      Employee-Work-sheet
                     </SidebarItem>
                     <SidebarItem href="/dashboard/employeeList" icon={HiUsers}>
                       Employee-List{" "}
-                    </SidebarItem>
-                    <SidebarItem href="/authentication/sign-in" icon={HiLogin}>
-                      Sign in
-                    </SidebarItem>
-                    <SidebarItem href="/authentication/sign-up" icon={HiPencil}>
-                      Sign up
                     </SidebarItem>
                   </SidebarItemGroup>
                   <SidebarItemGroup>
