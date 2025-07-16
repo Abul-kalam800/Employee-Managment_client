@@ -7,6 +7,7 @@ import Dashboard from "../Layouts/Dashboard";
 import WorkSheet from "../Dashboard/WorkSheet";
 import EmployeeList from "../Dashboard/EmployeeList";
 import PrivetRouter from "../PrivetRouter/PrivetRouter";
+import PaymentHistory from "../Dashboard/payment/PaymentHistory";
 
 export const router = createBrowserRouter([
   {
@@ -33,16 +34,15 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "work-sheet",
-        // element: (
-        //   <PrivetRouter>
-        //     <WorkSheet></WorkSheet>
-        //   </PrivetRouter>
-        // ),
         Component:WorkSheet
       },
       {
         path: "employeeList",
         Component: EmployeeList,
+      },
+      {
+        path:'paymenthistory',
+        Component:PaymentHistory
       },
     ],
   },

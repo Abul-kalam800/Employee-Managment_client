@@ -19,7 +19,9 @@ import {
   HiHome,
   HiInformationCircle,
   HiLogin,
+  HiOutlineReceiptRefund,
   HiPencil,
+  HiPlay,
   HiSearch,
   HiShoppingBag,
   HiUser,
@@ -28,6 +30,7 @@ import {
 import { Outlet } from "react-router";
 import Logo from "../Componets/Logo";
 import useAuth from "../Hook/useAuth";
+import PaymentHistory from "../Dashboard/payment/PaymentHistory";
 
 const Dashboard = ({ childern }) => {
   const [isOpen, setIsOpen] = useState(true);
@@ -67,27 +70,10 @@ const Dashboard = ({ childern }) => {
                     <SidebarItem href="/dashboard/employeeList" icon={HiUsers}>
                       Employee-List{" "}
                     </SidebarItem>
-                  </SidebarItemGroup>
-                  <SidebarItemGroup>
-                    <SidebarItem
-                      href="https://github.com/themesberg/flowbite-react/"
-                      icon={HiClipboard}
-                    >
-                      Docs
-                    </SidebarItem>
-                    <SidebarItem
-                      href="https://flowbite-react.com/"
-                      icon={HiCollection}
-                    >
-                      Components
-                    </SidebarItem>
-                    <SidebarItem
-                      href="https://github.com/themesberg/flowbite-react/issues"
-                      icon={HiInformationCircle}
-                    >
-                      Help
-                    </SidebarItem>
-                  </SidebarItemGroup>
+                   <SidebarItem href="/dashboard/paymenthistory" icon={HiOutlineReceiptRefund}>
+                      Payment-History
+                   </SidebarItem>
+                 </SidebarItemGroup>
                 </SidebarItems>
               </div>
 
