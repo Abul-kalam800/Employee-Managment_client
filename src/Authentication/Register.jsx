@@ -43,7 +43,7 @@ const Register = () => {
           bank_account: data.Account,
           salary: data.Salary,
           role: data.Role,
-          Desiganition: data.Desiganition,
+          Desiganation: data.Desigation,
           photo: profilePic,
           isVarified:false,
         };

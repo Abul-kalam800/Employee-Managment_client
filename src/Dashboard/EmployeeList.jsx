@@ -4,6 +4,7 @@ import Swal from "sweetalert2";
 import useAxios from "../Hook/useAxios";
 import Payment from "./payment/Payment";
 import Paymodal from "./payment/Paymodal";
+import { Link } from "react-router";
 
 const EmployeeList = () => {
   const axioesInstance = useAxios();
@@ -31,13 +32,15 @@ const EmployeeList = () => {
 
   const handlePay =  (employee) => {
     if (!employee.isVerified) return;
+    
+ 
 
     Swal.fire({
       title: `Pay ${employee.name}`,
       html: `
-        <input type="number" id="month" class="swal2-input" max=12 min= 1 placeholder="Month (1-12)" required />
+        <input type="month" id="month" class="swal2-input" max=12 min= 1  required />
         <input type="number" id="year" class="swal2-input" min=1 placeholder="Year (e.g. 2025)" required/>
-        <input type="text" id="salary" class="swal2-input"  value="${employee.salary}" readonly />
+        <input type="number" id="salary" class="swal2-input"  value="${employee.salary}" readonly />
       `,
       preConfirm: () => {
         const month = document.getElementById('month').value;
@@ -53,7 +56,7 @@ const EmployeeList = () => {
       if (result.isConfirmed) {
         const { id, salary, month, year } = result.value;
         const paymetRequest = {
-          id,salary,month,year
+          id,salary,month,year,email:employee.email,name:employee.name,
         }
         axioesInstance.post('/payroll',paymetRequest)
        .then(res=>{
@@ -77,7 +80,7 @@ const EmployeeList = () => {
 
   return (
     <div className="p-4 overflow-x-auto">
-      <h1 className="text-2xl font-bold mb-4">Employee List</h1>
+      <h1 className="text-4xl font-bold mb-10 text-center pb-5 border-dotted border-b-4 border-blue-500 w-5/12 mx-auto ">Employee List</h1>
       <table className="min-w-full bg-white border rounded">
         <thead className="bg-gray-100">
           <tr>
@@ -123,9 +126,9 @@ const EmployeeList = () => {
              
               </td>
               <td className="p-2 border text-sm text-center">
-                <button className="text-blue-600 hover:underline cursor-pointer">
+                <Link to={`/dashboard/employeedetails/${emp._id}`} className="text-blue-600 hover:underline cursor-pointer">
                   Details
-                </button>
+                </Link>
               </td>
             </tr>
           ))}

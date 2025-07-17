@@ -73,6 +73,9 @@ const Dashboard = ({ childern }) => {
                    <SidebarItem href="/dashboard/paymenthistory" icon={HiOutlineReceiptRefund}>
                       Payment-History
                    </SidebarItem>
+                   <SidebarItem href="/dashboard/hrprogress" icon={HiOutlineReceiptRefund}>
+                     HR-Progress
+                   </SidebarItem>
                  </SidebarItemGroup>
                 </SidebarItems>
               </div>

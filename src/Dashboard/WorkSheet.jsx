@@ -58,6 +58,7 @@ const WorkSheet = () => {
       hoursWorked: parseFloat(hoursWorked),
       date: date.toISOString(),
       employeeEmail: user?.email,
+      name: user?.displayName,
     };
     addWorkMutation.mutate(newWork);
   };
@@ -94,27 +95,27 @@ const WorkSheet = () => {
       return await axioesInstance.patch(`/emplyee/${id}`, updatedWork);
     },
     onSuccess: () => {
-    // ✅ Show SweetAlert on Success
-    Swal.fire({
-      icon: 'success',
-      title: 'Updated!',
-      text: 'Employee work entry updated successfully.',
-      timer: 2000,
-      showConfirmButton: false,
-    });
-    refetch();
+      // ✅ Show SweetAlert on Success
+      Swal.fire({
+        icon: "success",
+        title: "Updated!",
+        text: "Employee work entry updated successfully.",
+        timer: 2000,
+        showConfirmButton: false,
+      });
+      refetch();
 
-    // ✅ Refetch or update your table data
-    queryClient.invalidateQueries({ queryKey: ['emplyee'] });
-  },
+      // ✅ Refetch or update your table data
+      queryClient.invalidateQueries({ queryKey: ["emplyee"] });
+    },
 
-  onError: () => {
-    Swal.fire({
-      icon: 'error',
-      title: 'Update Failed',
-      text: 'Something went wrong during update.',
-    });
-  },
+    onError: () => {
+      Swal.fire({
+        icon: "error",
+        title: "Update Failed",
+        text: "Something went wrong during update.",
+      });
+    },
   });
 
   if (loading || !user) return <p>Loading user...</p>;
@@ -125,7 +126,10 @@ const WorkSheet = () => {
 
   return (
     <div className="p-4 max-w-6xl mx-auto">
-      <div className="flex flex-col md:flex-row items-center gap-4 mb-6">
+      <h1 className="text-4xl font-bold border-dotted border-b-4 border-blue-500 mb-10 w-5/12 mx-auto pb-5 text-center">
+        Employee work-sheet
+      </h1>
+      <div className="flex flex-col md:flex-row items-center gap-4 mb-6 bg-green-300 p-5">
         <select
           value={task}
           onChange={(e) => setTask(e.target.value)}
@@ -135,6 +139,9 @@ const WorkSheet = () => {
           <option>Support</option>
           <option>Content</option>
           <option>Paper-work</option>
+          <option>Document-managed</option>
+          <option>Programming</option>
+          <option>Designe</option>
         </select>
         <input
           type="number"
