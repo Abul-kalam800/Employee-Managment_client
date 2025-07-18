@@ -1,80 +1,96 @@
-import { Dialog, DialogPanel, Transition } from '@headlessui/react';
-import { Fragment, useState } from 'react';
-import axios from 'axios';
+import { Elements } from "@stripe/react-stripe-js";
+import React from "react";
+import { useState } from "react";
+import Swal from "sweetalert2";
+import Payment from "./Payment";
+import CheckoutForm from "./CheckoutForm";
+import { loadStripe } from "@stripe/stripe-js";
 
-const Paymodal = ({ isOpen, closeModal, employee, refreshData }) => {
-  const [month, setMonth] = useState('');
-  const [year, setYear] = useState('');
+const Paymodal = ({ isModalOpen, setIsModalOpen, emp, axioesInstance }) => {
+  const { name, salary, email } = emp;
 
-  const handlePayment = async () => {
-    await axios.post('/api/payroll', {
-      employeeId: employee._id,
-      salary: employee.salary,
+  const [month, setMonth] = useState("");
+  const [year, setYear] = useState("");
+  const stripePromies = loadStripe(import.meta.env.VITE_STRIPE_SK_KEY);
+  const handleSubmit = () => {
+    if (!month || !year)
+      return Swal.fire({
+        position: "top-end",
+        icon: "error",
+        title: "Please fill the month and year",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+
+    const paymentData = {
+      employeeId: emp?._id,
+      name,
+      email,
+      salary,
       month,
       year,
+    };
+
+    axioesInstance.post("/payroll", paymentData).then((res) => {
+      console.log(res);
+      if (res.data.result.insertedId) {
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Your payment request is done",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
     });
 
-    refreshData();         // Optional: Refresh payroll table in admin
-    closeModal();
-    alert('Payment request sent successfully.');
+    setIsModalOpen(false);
+    setMonth("");
+    setYear("");
   };
 
   return (
-    <Transition appear show={isOpen} as={Fragment}>
-      <Dialog as="div" className="relative z-10" onClose={closeModal}>
-        <div className="fixed inset-0 bg-black bg-opacity-25" />
-        <div className="fixed inset-0 overflow-y-auto flex items-center justify-center p-4">
-          <DialogPanel className="bg-white rounded-lg p-6 w-full max-w-md shadow-xl">
-            <DialogTitle className="text-lg font-bold mb-4">
-              Pay {employee?.name}
-            </DialogTitle>
+    <div>
+      {isModalOpen && (
+        <div className="fixed inset-0 flex items-center justify-center  bg-opacity-50 z-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg w-80">
+            <h2 className="text-xl font-semibold mb-4 bg-blue-400">{name}</h2>
+            <p className="mb-2 font-bold">Salary: {salary} USD</p>
 
             <input
               type="text"
-              value={employee?.salary}
-              readOnly
-              className="w-full mb-3 border rounded p-2 bg-gray-100"
-            />
-
-            <input
-              type="number"
-              placeholder="Month (1-12)"
-              min="1"
-              max="12"
+              placeholder="Month (e.g., July)"
               value={month}
               onChange={(e) => setMonth(e.target.value)}
-              className="w-full mb-3 border rounded p-2"
+              className="w-full border p-2 mb-2 rounded"
             />
-
             <input
-              type="number"
-              placeholder="Year (e.g. 2025)"
+              type="text"
+              placeholder="Year (e.g., 2025)"
               value={year}
               onChange={(e) => setYear(e.target.value)}
-              className="w-full mb-3 border rounded p-2"
+              className="w-full border p-2 mb-4 rounded"
             />
+            <Elements stripe={stripePromies}>
+              <CheckoutForm handleSubmit={handleSubmit} salary={salary} setIsModalOpen={setIsModalOpen}></CheckoutForm>
+            </Elements>
+            <div className="flex justify-between space-x-4">
+             
 
-            <div className="flex justify-end space-x-2">
-              <button
-                className="bg-gray-300 px-4 py-2 rounded"
-                onClick={closeModal}
+              {/* <Elements stripe={stripePromise}>
+                <CheckoutForm />
+              </Elements> */}
+              {/* <button
+                onClick={handleSubmit}
+                className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
               >
-                Cancel
-              </button>
-              <button
-                disabled={!month || !year}
-                className={`px-4 py-2 rounded text-white ${
-                  month && year ? 'bg-blue-600' : 'bg-gray-400 cursor-not-allowed'
-                }`}
-                onClick={handlePayment}
-              >
-                Pay
-              </button>
+                Paysubmit
+              </button> */}
             </div>
-          </DialogPanel>
+          </div>
         </div>
-      </Dialog>
-    </Transition>
+      )}
+    </div>
   );
 };
 
