@@ -1,53 +1,18 @@
 import { Elements } from "@stripe/react-stripe-js";
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import Swal from "sweetalert2";
 import Payment from "./Payment";
 import CheckoutForm from "./CheckoutForm";
 import { loadStripe } from "@stripe/stripe-js";
 
+
 const Paymodal = ({ isModalOpen, setIsModalOpen, emp, axioesInstance }) => {
-  const { name, salary, email } = emp;
+  const { name, salary, email,_id } = emp;
 
   const [month, setMonth] = useState("");
   const [year, setYear] = useState("");
   const stripePromies = loadStripe(import.meta.env.VITE_STRIPE_SK_KEY);
-  const handleSubmit = () => {
-    if (!month || !year)
-      return Swal.fire({
-        position: "top-end",
-        icon: "error",
-        title: "Please fill the month and year",
-        showConfirmButton: false,
-        timer: 1500,
-      });
-
-    const paymentData = {
-      employeeId: emp?._id,
-      name,
-      email,
-      salary,
-      month,
-      year,
-    };
-
-    axioesInstance.post("/payroll", paymentData).then((res) => {
-      console.log(res);
-      if (res.data.result.insertedId) {
-        Swal.fire({
-          position: "top-end",
-          icon: "success",
-          title: "Your payment request is done",
-          showConfirmButton: false,
-          timer: 1500,
-        });
-      }
-    });
-
-    setIsModalOpen(false);
-    setMonth("");
-    setYear("");
-  };
 
   return (
     <div>
@@ -72,11 +37,20 @@ const Paymodal = ({ isModalOpen, setIsModalOpen, emp, axioesInstance }) => {
               className="w-full border p-2 mb-4 rounded"
             />
             <Elements stripe={stripePromies}>
-              <CheckoutForm handleSubmit={handleSubmit} salary={salary} setIsModalOpen={setIsModalOpen}></CheckoutForm>
+              <CheckoutForm
+                salary={salary}
+                setIsModalOpen={setIsModalOpen}
+                setMonth={setMonth}
+                setYear={setYear}
+                month={month}
+                year={year}
+                email={email}
+                name={name}
+                id={_id}
+                
+              ></CheckoutForm>
             </Elements>
             <div className="flex justify-between space-x-4">
-             
-
               {/* <Elements stripe={stripePromise}>
                 <CheckoutForm />
               </Elements> */}
