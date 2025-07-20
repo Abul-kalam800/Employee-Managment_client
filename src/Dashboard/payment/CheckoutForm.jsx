@@ -86,7 +86,8 @@ month,setYear,year,
       salary,
       month,
       year,
-      transactionId
+      transactionId,
+    
     };
 
      axioesInstance.post("/payroll", paymentData).then((res) => {
