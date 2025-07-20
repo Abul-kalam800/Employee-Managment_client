@@ -41,11 +41,12 @@ const Register = () => {
           email,
           name:data.name,
           bank_account: data.Account,
-          salary: data.Salary,
+          salary: parseInt(data.Salary) ,
           role: data.Role,
           Desiganation: data.Desigation,
           photo: profilePic,
           isVarified:false,
+          status:'pending',
         };
         console.log(userInfo);
         const userRes = await axioesInstance.post("/users", userInfo);

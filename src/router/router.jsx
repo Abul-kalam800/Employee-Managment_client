@@ -10,6 +10,7 @@ import PrivetRouter from "../PrivetRouter/PrivetRouter";
 import PaymentHistory from "../Dashboard/payment/PaymentHistory";
 import EmployeeDetails from "../Dashboard/employeeDetails/EmployeeDetails";
 import HrProgress from "../Dashboard/HR-progress/HrProgress";
+import VerifiedAllemployee from "../Dashboard/admin/VerifiedAllemployee";
 
 export const router = createBrowserRouter([
   {
@@ -52,6 +53,10 @@ export const router = createBrowserRouter([
       },
       {path:'hrprogress',
         Component:HrProgress
+      },
+      {
+        path:'verifiedallemployee',
+        Component:VerifiedAllemployee
       }
     ],
   },

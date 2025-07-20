@@ -76,6 +76,9 @@ const Dashboard = ({ childern }) => {
                    <SidebarItem href="/dashboard/hrprogress" icon={HiOutlineReceiptRefund}>
                      HR-Progress
                    </SidebarItem>
+                   <SidebarItem href="/dashboard/verifiedallemployee" icon={HiOutlineReceiptRefund}>
+                    Verified-All-emplouee
+                   </SidebarItem>
                  </SidebarItemGroup>
                 </SidebarItems>
               </div>

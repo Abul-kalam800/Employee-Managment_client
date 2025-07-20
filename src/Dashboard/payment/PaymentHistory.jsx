@@ -1,24 +1,28 @@
+import React from 'react';
 import { useQuery } from '@tanstack/react-query';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import useAxios from '../../Hook/useAxios';
 import useAuth from '../../Hook/useAuth';
+
+
+
 const PaymentHistory = () => {
+
   const [page, setPage] = useState(1);
-   const {user}=useAuth()
-   console.log(user.email)
+   const {user,loading}=useAuth()
+
+//    console.log(user.email)
    const axioesInstance = useAxios()
-  const { data, isLoading, error } = useQuery({
-    queryKey: ['paymentHistory', user.email, page],
+  const { data: payments=[], isLoading, error } = useQuery({
+    queryKey: ['paymentHistory', page],
     queryFn: async()=> {
-        const res = await axioesInstance.get(`/paymentHistory?.email=user.email`)
-        return res.data;
+    //     const res = await axioesInstance.get(`/paymentHistory?.email=${user.email}`)
+    //     return res.data;
     }
     
   });
-  console.log(data)
 
-  if (isLoading) return <p>Loading...</p>;
-  if (error) return <p>Something went wrong!</p>;
+ if (loading) return <p>Loading user...</p>;
 
   return (
     <div className="max-w-xl mx-auto mt-6">
@@ -34,7 +38,7 @@ const PaymentHistory = () => {
           </tr>
         </thead>
         <tbody>
-          {data.payments.map((payment) => (
+          {data.payments.map-((payment) => (
             <tr key={payment._id}>
               <td className="border px-2 py-1">{payment.month}</td>
               <td className="border px-2 py-1">{payment.year}</td>
