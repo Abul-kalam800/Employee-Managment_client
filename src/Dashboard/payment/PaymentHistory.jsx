@@ -1,31 +1,29 @@
-import React from 'react';
-import { useQuery } from '@tanstack/react-query';
-import { useState } from 'react';
-import useAxios from '../../Hook/useAxios';
-import useAuth from '../../Hook/useAuth';
-
+import React from "react";
+import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
+import useAxios from "../../Hook/useAxios";
+import useAuth from "../../Hook/useAuth";
 
 
 const PaymentHistory = () => {
+  const {user}=useAuth();
+  const email = user?.email;
 
+  //    console.log(user.email)
+  const axioesInstance = useAxios();
   const [page, setPage] = useState(1);
-   const {user,loading}=useAuth()
-
-//    console.log(user.email)
-   const axioesInstance = useAxios()
-  const { data: payments=[], isLoading, error } = useQuery({
-    queryKey: ['paymentHistory', page],
-    queryFn: async()=> {
-    //     const res = await axioesInstance.get(`/paymentHistory?.email=${user.email}`)
-    //     return res.data;
-    }
-    
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["paymentHistoty", email, page],
+    queryFn: async () => {
+      const res = await axioesInstance.get(`/paymentHistory?email=${email}&&page=${page}`);
+      return res.data;
+    },
   });
 
- if (loading) return <p>Loading user...</p>;
+  if (isLoading) return <p>Loading user...</p>;
 
   return (
-    <div className="max-w-xl mx-auto mt-6">
+    <div className="max-w-xl mx-auto mt-6 overflow-x-auto px-10 ">
       <h2 className="text-2xl font-semibold mb-4">Payment History</h2>
 
       <table className="w-full border text-left">
@@ -38,14 +36,14 @@ const PaymentHistory = () => {
           </tr>
         </thead>
         <tbody>
-          {data.payments.map-((payment) => (
-            <tr key={payment._id}>
-              <td className="border px-2 py-1">{payment.month}</td>
-              <td className="border px-2 py-1">{payment.year}</td>
-              <td className="border px-2 py-1">${payment.amount}</td>
-              <td className="border px-2 py-1">{payment.transactionId}</td>
-            </tr>
-          ))}
+          {data.payments.map((payment) => (
+              <tr key={payment._id}>
+                <td className="border px-2 py-1">{payment.month}</td>
+                <td className="border px-2 py-1">{payment.year}</td>
+                <td className="border px-2 py-1">${payment.salary}</td>
+                <td className="border px-2 py-1">{payment.transactionId}</td>
+              </tr>
+            ))}
         </tbody>
       </table>
 
@@ -59,10 +57,14 @@ const PaymentHistory = () => {
           Previous
         </button>
 
-        <p>Page {page} of {data.totalPages}</p>
+        <p>
+          Page {page} of {data.totalPages}
+        </p>
 
         <button
-          onClick={() => setPage((old) => (old < data.totalPages ? old + 1 : old))}
+          onClick={() =>
+            setPage((old) => (old < data.totalPages ? old + 1 : old))
+          }
           disabled={page >= data.totalPages}
           className="px-3 py-1 bg-gray-300 rounded hover:bg-gray-400"
         >
@@ -72,6 +74,4 @@ const PaymentHistory = () => {
     </div>
   );
 };
-;
-
 export default PaymentHistory;

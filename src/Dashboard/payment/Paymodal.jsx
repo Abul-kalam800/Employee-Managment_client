@@ -1,8 +1,6 @@
+import React from "react";
 import { Elements } from "@stripe/react-stripe-js";
-import React, { useEffect } from "react";
 import { useState } from "react";
-import Swal from "sweetalert2";
-import Payment from "./Payment";
 import CheckoutForm from "./CheckoutForm";
 import { loadStripe } from "@stripe/stripe-js";
 

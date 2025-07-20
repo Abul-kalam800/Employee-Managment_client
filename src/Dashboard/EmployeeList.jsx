@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
+import  { useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import Swal from "sweetalert2";
 import useAxios from "../Hook/useAxios";
-import Payment from "./payment/Payment";
 import Paymodal from "./payment/Paymodal";
 import { Link } from "react-router";
 
