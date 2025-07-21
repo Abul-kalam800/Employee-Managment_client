@@ -32,6 +32,7 @@ import Logo from "../Componets/Logo";
 
 import { GrMenu } from "react-icons/gr";
 import Footer from '../sheard/Footer';
+import DashboardBanner from "../Dashboard/DashboardBanner";
 
 const Dashboard = () => {
   const [isOpen, setIsOpen] = useState(true);
@@ -45,9 +46,8 @@ const Dashboard = () => {
      <div className="max-w-7xl mx-auto">
      <div className="flex justify-between items-center border-b-2">
        <Logo></Logo>
-        <button onClick={() => setIsOpen(!isOpen)} className="btn bg-blue-300 p-3 "><GrMenu/> </button>
+        <button onClick={() => setIsOpen(!isOpen)} className="btn bg-blue-300 p-3 "><GrMenu size={25}/> </button>
      </div >
-    
       <div className="my-10 ">
          <Outlet></Outlet>
       </div>
@@ -85,20 +85,18 @@ const Dashboard = () => {
                    <SidebarItem href="/dashboard/paymentpayroll" icon={HiOutlineReceiptRefund}>
                    Payment-Payroll
                    </SidebarItem>
+                   <SidebarItem href="/dashboard/adminmessage" icon={HiOutlineReceiptRefund}>
+                  Admin-message
+                   </SidebarItem>
                  </SidebarItemGroup>
                 </SidebarItems>
-              </div>
-
-              <div className="flex p-2">
-                <Outlet>
-                  <p>kalam</p>
-                </Outlet>
               </div>
             </div>
           </Sidebar>
         </DrawerItems>
       </Drawer>
     <div>
+     
       <Footer></Footer>
     </div>
     </>

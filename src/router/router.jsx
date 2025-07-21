@@ -12,6 +12,9 @@ import EmployeeDetails from "../Dashboard/employeeDetails/EmployeeDetails";
 import HrProgress from "../Dashboard/HR-progress/HrProgress";
 import VerifiedAllemployee from "../Dashboard/admin/VerifiedAllemployee";
 import PaymentPayroll from "../Dashboard/payroll/PaymentPayroll";
+import ContactUs from "../Pages/ContactUs/ContactUs";
+import AdminMessage from "../Dashboard/contactusmessage/AdminMessage";
+import DashboardBanner from "../Dashboard/DashboardBanner";
 
 export const router = createBrowserRouter([
   {
@@ -21,6 +24,10 @@ export const router = createBrowserRouter([
       {
         index: true,
         Component: HomePage,
+      },
+      {
+        path:'/contactus',
+        Component:ContactUs
       },
       {
         path: "/login",
@@ -36,6 +43,10 @@ export const router = createBrowserRouter([
     path: "/dashboard",
     Component: Dashboard,
     children: [
+      {
+        index:true,
+        Component:DashboardBanner
+      },
       {
         path: "work-sheet",
         Component:WorkSheet
@@ -62,6 +73,10 @@ export const router = createBrowserRouter([
       {
         path:'paymentpayroll',
         Component:PaymentPayroll
+      },
+      {
+        path:'adminmessage',
+        Component:AdminMessage
       }
     ],
   },

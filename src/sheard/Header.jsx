@@ -39,7 +39,7 @@ const Header = () => {
             </NavLink>
           </li>
           <li className="flex">
-            <NavLink to="/" className="flex items-center px-4 -mb-1">
+            <NavLink to="/contactus" className="flex items-center px-4 -mb-1">
               Contact us
             </NavLink>
           </li>
