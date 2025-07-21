@@ -1,3 +1,4 @@
+import React from "react";
 import { createBrowserRouter } from "react-router";
 import MainLayout from "../Layouts/MainLayout";
 import HomePage from "../Pages/Home/HomePage";
@@ -15,6 +16,8 @@ import PaymentPayroll from "../Dashboard/payroll/PaymentPayroll";
 import ContactUs from "../Pages/ContactUs/ContactUs";
 import AdminMessage from "../Dashboard/contactusmessage/AdminMessage";
 import DashboardBanner from "../Dashboard/DashboardBanner";
+import Forbidden from "../Pages/forbiddenPage/Forbidden";
+import AdminRouter from "../PrivetRouter/adminRouter/AdminRouter";
 
 export const router = createBrowserRouter([
   {
@@ -24,6 +27,10 @@ export const router = createBrowserRouter([
       {
         index: true,
         Component: HomePage,
+      },
+      {
+        path:'/forbidden',
+        Component:Forbidden,
       },
       {
         path:'/contactus',
@@ -41,7 +48,7 @@ export const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    Component: Dashboard,
+    element:<PrivetRouter><Dashboard></Dashboard></PrivetRouter>,
     children: [
       {
         index:true,
@@ -76,7 +83,7 @@ export const router = createBrowserRouter([
       },
       {
         path:'adminmessage',
-        Component:AdminMessage
+       element:<AdminRouter><AdminMessage></AdminMessage></AdminRouter>
       }
     ],
   },
