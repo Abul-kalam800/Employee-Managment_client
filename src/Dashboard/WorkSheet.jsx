@@ -16,6 +16,7 @@ const WorkSheet = () => {
   const axioesInstance = useAxios();
   const { user, loading } = useAuth();
   const [editingWork, setEditingWork] = useState(null);
+  const [month, setMonth] = useState("January");
 
   //   get data
   const {
@@ -59,6 +60,7 @@ const WorkSheet = () => {
       date: date.toISOString(),
       employeeEmail: user?.email,
       name: user?.displayName,
+      month,
     };
     addWorkMutation.mutate(newWork);
   };
@@ -157,12 +159,33 @@ const WorkSheet = () => {
           className="border px-2 py-1 rounded"
           required
         />
-        <button
+       
+        <select
+          className="border p-2 rounded"
+          value={month}
+          onChange={(e) => setMonth(e.target.value)}
+        >
+          <option value="January">January</option>
+          <option value="February">February</option>
+          <option value="March">March</option>
+          <option value="April">April</option>
+          <option value="May">May</option>
+          <option value="June">June</option>
+          <option value="July">July</option>
+          <option value="August">August</option>
+          <option value="September">September</option>
+          <option value="October">October</option>
+          <option value="November">November</option>
+          <option value="December">December</option>
+        </select>
+
+         <button
           onClick={handleSubmit}
-          className="bg-blue-500 text-white px-4 py-1 rounded"
+          className="bg-blue-500 text-white px-4 py-1 rounded cursor-pointer"
         >
           {addWorkMutation.isPending ? "Adding..." : "Add / Submit"}
         </button>
+
       </div>
 
       {/* Table */}
@@ -173,6 +196,7 @@ const WorkSheet = () => {
               <th className="p-2 border">Task</th>
               <th className="p-2 border">Hours Worked</th>
               <th className="p-2 border">Date</th>
+              <th className="p-2 border">Month</th>
               <th className="p-2 border">Actions</th>
             </tr>
           </thead>
@@ -184,6 +208,7 @@ const WorkSheet = () => {
                 <td className="p-2 border">
                   {new Date(work.date).toLocaleDateString()}
                 </td>
+                <td className="p-2 border">{work.month}</td>
                 <td className="p-2 border flex items-center justify-center gap-2">
                   <button
                     onClick={() => setEditingWork(work)}

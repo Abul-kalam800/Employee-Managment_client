@@ -8,7 +8,7 @@ import Blog from "./Blog.jsx";
 
 const HomePage = () => {
   return (
-    <div>
+    <div className="max-w-7xl mx-auto">
       <Banner></Banner>
       <Services></Services>
       <Testimonial></Testimonial>

@@ -1,79 +1,99 @@
-import React, { useState } from "react";
-import useAxios from "../../Hook/useAxios";
+import React from "react";
+import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
+import useAxios from "../../Hook/useAxios";
 
 const HrProgress = () => {
   const axioesInstance = useAxios();
-  const [name,setName]=useState('')
+  const [selectname, setSelectname] = useState("");
+  const [selectedMonth, setSelectedMonth] = useState("");
 
-  const { data: works = [], isLoading } = useQuery({
-    queryKey: ["progress", name ],
+  // Fetch work records based on filters
+  const { data: workRecords = [], isLoading } = useQuery({
+    queryKey: ["workRecords", selectname, selectedMonth],
     queryFn: async () => {
-      const res = await axioesInstance.get(`/progress?name=${name}`);
-      return res;
+      const res = await axioesInstance.get("/work-progress", {
+        params: {
+         name: selectname || undefined, // omit if empty
+          month: selectedMonth || undefined,
+        },
+      });
+      return res.data;
     },
   });
-console.log(works)
-  if (isLoading) return <p className="text-center mt-10">Loading...</p>;
+  // unique name
+  const uniqueNames = [...new Set(workRecords.map((emp) => emp.name))];
+
+  if (isLoading) return <p>Loading work records...</p>;
 
   return (
-    <div className="p-4 max-w-6xl mx-auto">
-      <h1 className="text-xl font-bold mb-4">Employee Work Progress</h1>
+    <div className="max-w-6xl mx-auto p-4">
+      <h2 className="text-2xl font-semibold mb-4 bg-blue-400 p-5 md:text-4xl">
+        Employee Work Records
+      </h2>
 
-      <div className="flex gap-4 mb-6">
+      {/* Filters */}
+      <div className="flex gap-4 mb-4">
         <select
-          className="border px-3 py-2 rounded"
-          value={setName}
-          onChange={(e) => setName(e.target.value)}
+          className="border p-2 rounded"
+          value={selectname}
+          onChange={(e) => setSelectname(e.target.value)}
         >
           <option value="">All Employees</option>
-          <option value="John Doe">John Doe</option>
-          <option value="Jane Smith">Jane Smith</option>
-          {/* You can fetch employee names dynamically */}
+          {uniqueNames.map((name) => (
+            <option key={name} value={name}>
+              {name}
+            </option>
+          ))}
+          {/* TODO: Dynamically load employee names */}
         </select>
 
         <select
-          className="border px-3 py-2 rounded"
-          value={''}
-          onChange={(e) => setMonth(e.target.value)}
+          className="border p-2 rounded"
+          value={selectedMonth}
+          onChange={(e) => setSelectedMonth(e.target.value)}
         >
-          {[
-            "January",
-            "February",
-            "March",
-            "April",
-            "May",
-            "June",
-            "July",
-            "August",
-          ].map((m) => (
-            <option key={m} value={m}>
-              {m}
-            </option>
-          ))}
+          <option value="">All Months</option>
+          <option value="January">January</option>
+          <option value="February">February</option>
+          <option value="March">March</option>
+          <option value="April">April</option>
+          <option value="May">May</option>
+          <option value="June">June</option>
+          <option value="July">July</option>
+          <option value="August">August</option>
+          <option value="September">September</option>
+          <option value="October">October</option>
+          <option value="November">November</option>
+          <option value="December">December</option>
         </select>
       </div>
 
-      <table className="w-full text-left border">
-        <thead>
-          <tr>
-            <th className="border px-4 py-2">Employee</th>
-            <th className="border px-4 py-2">Task</th>
-            <th className="border px-4 py-2">Progress</th>
-          </tr>
-        </thead>
-        <tbody>
-          {works.map((work) => (
-            <tr key={work._id}>
-              <td className="border px-4 py-2">{work.employeeEmail}</td>
-              <td className="border px-4 py-2">{work.task}</td>
-              <td className="border px-4 py-2 w-1/3">
-                {/* <ProgressBar progress={work.progress} /> */}
-              </td>
+      {/* Work Records Table */}
+      {workRecords.length === 0 ? (
+        <p>No work records found.</p>
+      ) : (
+        <table className="w-full border text-left">
+          <thead>
+            <tr>
+              <th className="border p-2">Employee</th>
+              <th className="border p-2">Month</th>
+              <th className="border p-2">Work Details</th>
+              <th className="border p-2">Date</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {workRecords.map((record) => (
+              <tr key={record._id}>
+                <td className="border p-2">{record.name}</td>
+                <td className="border p-2">{record.month}</td>
+                <td className="border p-2">{record.task}</td>
+                <td className="border p-2">{record.date}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
     </div>
   );
 };

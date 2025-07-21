@@ -64,7 +64,7 @@ const Register = () => {
       timer: 1500,
     });
   };
-
+// upload image handle 
   const uploadImagehandle = async (e) => {
     const image = e.target.files[0];
     console.log(image);

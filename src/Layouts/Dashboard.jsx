@@ -30,7 +30,7 @@ import {
 import { Outlet } from "react-router";
 import Logo from "../Componets/Logo";
 
-
+import { GrMenu } from "react-icons/gr";
 import Footer from '../sheard/Footer';
 
 const Dashboard = () => {
@@ -45,7 +45,7 @@ const Dashboard = () => {
      <div className="max-w-7xl mx-auto">
      <div className="flex justify-between items-center border-b-2">
        <Logo></Logo>
-        <Button onClick={() => setIsOpen(!isOpen)} className="btn bg-[#3366cc]">Manu</Button>
+        <button onClick={() => setIsOpen(!isOpen)} className="btn bg-blue-300 p-3 "><GrMenu/> </button>
      </div >
     
       <div className="my-10 ">
