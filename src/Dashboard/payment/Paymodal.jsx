@@ -5,7 +5,7 @@ import CheckoutForm from "./CheckoutForm";
 import { loadStripe } from "@stripe/stripe-js";
 
 
-const Paymodal = ({ isModalOpen, setIsModalOpen, emp, axioesInstance }) => {
+const Paymodal = ({ isModalOpen, setIsModalOpen, emp }) => {
   const { name, salary, email,_id } = emp;
 
   const [month, setMonth] = useState("");

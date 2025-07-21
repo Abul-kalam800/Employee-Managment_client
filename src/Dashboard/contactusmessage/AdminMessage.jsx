@@ -1,6 +1,7 @@
 import React from "react";
 import useAxios from "../../Hook/useAxios";
 import { useQuery } from '@tanstack/react-query';
+import LoadingSpnieer from "../../Pages/spinnerPage/LoadingSpnieer";
 
 const AdminMessage = () => {
  const axioesInstance = useAxios();
@@ -13,7 +14,7 @@ const AdminMessage = () => {
     },
   });
 
-  if (isLoading) return <p>Loading messages...</p>;
+  if (isLoading) return <LoadingSpnieer></LoadingSpnieer>;
 
   return (
     <div className="max-w-4xl mx-auto p-4">

@@ -18,11 +18,13 @@ import AdminMessage from "../Dashboard/contactusmessage/AdminMessage";
 import DashboardBanner from "../Dashboard/DashboardBanner";
 import Forbidden from "../Pages/forbiddenPage/Forbidden";
 import AdminRouter from "../PrivetRouter/adminRouter/AdminRouter";
+import ErrorPage from "../Pages/Error404page/ErrorPage";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     Component: MainLayout,
+    errorElement: ErrorPage,
     children: [
       {
         index: true,
@@ -34,7 +36,7 @@ export const router = createBrowserRouter([
       },
       {
         path:'/contactus',
-        Component:ContactUs
+        Component:ErrorPage
       },
       {
         path: "/login",
@@ -49,6 +51,8 @@ export const router = createBrowserRouter([
   {
     path: "/dashboard",
     element:<PrivetRouter><Dashboard></Dashboard></PrivetRouter>,
+    errorElement:ErrorPage,
+    errorElement:Forbidden,
     children: [
       {
         index:true,
@@ -75,11 +79,13 @@ export const router = createBrowserRouter([
       },
       {
         path:'verifiedallemployee',
-        Component:VerifiedAllemployee
+        // Component:VerifiedAllemployee
+        element:<AdminRouter><VerifiedAllemployee></VerifiedAllemployee></AdminRouter>
       },
       {
         path:'paymentpayroll',
-        Component:PaymentPayroll
+        // Component:PaymentPayroll
+        element:<AdminRouter><PaymentPayroll></PaymentPayroll></AdminRouter>
       },
       {
         path:'adminmessage',

@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 import useAxios from "../Hook/useAxios";
 import Paymodal from "./payment/Paymodal";
 import { Link } from "react-router";
+import LoadingSpnieer from "../Pages/spinnerPage/LoadingSpnieer";
 
 const EmployeeList = () => {
   const axioesInstance = useAxios();
@@ -35,46 +36,9 @@ const EmployeeList = () => {
     if (!employee.isVerified) return;
     setEmployeeSingle(employee);
     setIsModalOpen(true);
-
-    // Swal.fire({
-    //   title: `Pay ${employee.name}`,
-    //   html: `
-    //     <input type="month" id="month" class="swal2-input" max=12 min= 1  required />
-    //     <input type="number" id="year" class="swal2-input" min=1 placeholder="Year (e.g. 2025)" required/>
-    //     <input type="number" id="salary" class="swal2-input"  value="${employee.salary}" readonly />
-    //   `,
-    //   preConfirm: () => {
-    //     const month = document.getElementById('month').value;
-    //     const year = document.getElementById('year').value;
-
-    //     return { id: employee._id, salary: employee.salary, month,year };
-    //   },
-
-    //   showCancelButton: true,
-    //   confirmButtonText: 'Send Request',
-    // }).then((result) => {
-    //   if (result.isConfirmed) {
-    //     const { id, salary, month, year } = result.value;
-    //     const paymetRequest = {
-    //       id,salary,month,year,email:employee.email,name:employee.name,
-    //     }
-    //     axioesInstance.post('/payroll',paymetRequest)
-    //    .then(res=>{
-    //      console.log(res.data)
-    //     if(res.data.insertedId){
-
-    //     }
-
-    //   })
-    //   Swal.fire('Requested!', 'Payment request sent.', 'success',);
-
-    //     // console.log('Payment request:', { id, salary, month, year });
-
-    //   }
-    // });
   };
 
-  if (isLoading) return <p>Loading employees...</p>;
+  if (isLoading) return <LoadingSpnieer></LoadingSpnieer>;
 
   return (
     <div className="p-4 overflow-x-auto">

@@ -11,6 +11,7 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
+import LoadingSpnieer from "../../Pages/spinnerPage/LoadingSpnieer";
 
 const EmployeeDetails = () => {
     const queryClient = useQueryClient();
@@ -25,7 +26,7 @@ const EmployeeDetails = () => {
     },
   });
   if (isLoading) {
-    <span>loading............</span>;
+    <LoadingSpnieer></LoadingSpnieer>
   }
   console.log(singleEmployee);
   return (

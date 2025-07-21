@@ -1,12 +1,13 @@
 import React from "react";
 import useAuth from "../Hook/useAuth";
 import { Navigate, useLocation } from "react-router";
+import LoadingSpnieer from "../Pages/spinnerPage/LoadingSpnieer";
 
 const PrivetRouter = ({ children }) => {
   const { user, loading } = useAuth();
   const location = useLocation();
   if (loading) {
-    return <span>loading..............</span>;
+    return <LoadingSpnieer></LoadingSpnieer>
   }
   if (!user) {
     return (

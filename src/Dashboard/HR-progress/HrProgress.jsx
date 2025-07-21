@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import useAxios from "../../Hook/useAxios";
+import LoadingSpnieer from "../../Pages/spinnerPage/LoadingSpnieer";
 
 const HrProgress = () => {
   const axioesInstance = useAxios();
@@ -24,8 +25,7 @@ const HrProgress = () => {
   // unique name
   const uniqueNames = [...new Set(workRecords.map((emp) => emp.name))];
 
-  if (isLoading) return <p>Loading work records...</p>;
-
+  if (isLoading) return <LoadingSpnieer></LoadingSpnieer>
   return (
     <div className="max-w-6xl mx-auto p-4">
       <h2 className="text-2xl font-semibold mb-4 bg-blue-400 p-5 md:text-4xl">

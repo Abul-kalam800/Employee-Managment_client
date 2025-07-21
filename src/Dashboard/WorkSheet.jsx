@@ -7,6 +7,7 @@ import useAuth from "../Hook/useAuth";
 import Swal from "sweetalert2";
 import { FaEdit } from "react-icons/fa";
 import { MdDeleteForever } from "react-icons/md";
+import LoadingSpnieer from "../Pages/spinnerPage/LoadingSpnieer";
 export const queryClient = new QueryClient();
 
 const WorkSheet = () => {
@@ -120,10 +121,9 @@ const WorkSheet = () => {
     },
   });
 
-  if (loading || !user) return <p>Loading user...</p>;
+  if (loading || !user) return <LoadingSpnieer></LoadingSpnieer>
 
-  if (isLoading) return <p>Loading employee works...</p>;
-
+  if (isLoading) return <LoadingSpnieer></LoadingSpnieer>
   console.log(user.email);
 
   return (

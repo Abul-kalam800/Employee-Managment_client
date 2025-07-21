@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import useAxios from "../../Hook/useAxios";
 import useAuth from "../../Hook/useAuth";
+import LoadingSpnieer from "../../Pages/spinnerPage/LoadingSpnieer";
 
 
 const PaymentHistory = () => {
@@ -12,7 +13,7 @@ const PaymentHistory = () => {
   //    console.log(user.email)
   const axioesInstance = useAxios();
   const [page, setPage] = useState(1);
-  const { data, isLoading, error } = useQuery({
+  const { data, isLoading} = useQuery({
     queryKey: ["paymentHistoty", email, page],
     queryFn: async () => {
       const res = await axioesInstance.get(`/paymentHistory?email=${email}&&page=${page}`);
@@ -20,7 +21,7 @@ const PaymentHistory = () => {
     },
   });
 
-  if (isLoading) return <p>Loading user...</p>;
+  if (isLoading) return <LoadingSpnieer></LoadingSpnieer>
 
   return (
     <div className="max-w-xl mx-auto mt-6 overflow-x-auto px-10 ">
