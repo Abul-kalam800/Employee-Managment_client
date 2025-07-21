@@ -47,7 +47,7 @@ const Header = () => {
         <div className="">
         {user ? (<>
        
-            <img src={user.photoURL}  className="w-12 h-12 rounded-full cursor-pointer relative" onClick={handlePhoto}/>
+            <img src={user?.photoURL}  className="w-12 h-12 rounded-full cursor-pointer relative" onClick={handlePhoto}/>
       
         {
           logopen? 

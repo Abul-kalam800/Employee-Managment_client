@@ -11,6 +11,7 @@ import { FaTableList } from "react-icons/fa6";
 
 const VerifiedAllemployee = () => {
   const [isTableView, setIsTableView] = useState(true);
+  const [salary, setSalary] = useState({});
   const queryClient = useQueryClient();
   const axioesInstance = useAxios();
   const { data: users = [], isLoading } = useQuery({
@@ -37,10 +38,15 @@ const VerifiedAllemployee = () => {
 
   const updateSalaryMutation = useMutation({
     mutationFn: async ({ id, newSalary }) => {
-      await axioesInstance.patch(`/user/salary/${id}`);
+      await axioesInstance.patch(
+        `/user/salary/${id}`,
+        { newSalary },
+        { method: "PATCH" }
+      );
     },
     onSuccess: () => queryClient.invalidateQueries(["verifiedUsers"]),
   });
+
   // toggol btn
   const handleToggleView = () => setIsTableView(!isTableView);
 
@@ -48,22 +54,25 @@ const VerifiedAllemployee = () => {
 
   return (
     <div className="max-w-6xl mx-auto p-4">
-      <div className="flex justify-between items-center mb-4">
-        <h2 className="text-2xl font-bold mb-4 bg-blue-400 p-5">
-          All Verified Employees & HRs
+      <div className="flex flex-col mb-4">
+        <h2 className="text-xl  md:text-4xl font-bold mb-4 bg-blue-100 p-2 text-center">
+          All Verified Employees & HR
         </h2>
-        <button
-          onClick={handleToggleView}
-          className="px-4 py-2 bg-blue-600 text-white rounded"
-        >
-          {isTableView ? <IoGrid/> :<FaTableList/>}
-        </button>
+        <p className="text-center mx-auto">
+          Here you can fire any employee and hr also can adjuest salry and make hr from employee as you
+          want 
+        </p>
       </div>
+      <button
+        onClick={handleToggleView}
+        className="px-4 py-2 bg-blue-600 text-white rounded cursor-pointer"
+      >
+        {isTableView ? <IoGrid /> : <FaTableList />}
+      </button>
 
       {isTableView ? (
         <>
-          <div className="p-4 max-w-6xl mx-auto overflow-x-auto">
-      
+          <div className="p-4 max-w-6xl mx-auto overflow-x-auto mt-5">
             <table className="w-full border">
               <thead>
                 <tr>
@@ -121,19 +130,17 @@ const VerifiedAllemployee = () => {
                     <td className="border p-2">
                       <input
                         type="number"
+                        className="border p-1 rounded w-24"
                         defaultValue={user.salary}
-                        min={user.salary + 1}
-                        onBlur={(e) => {
-                          const newSalary = parseInt(e.target.value);
-
-                          if (newSalary > 0) {
+                        onChange={(e) => setSalary(parseInt(e.target.value))}
+                        onBlur={() => {
+                          if (salary > user.salary) {
                             updateSalaryMutation.mutate({
                               id: user._id,
-                              // ✅ Passing object to API call (correct)
+                              newSalary: salary,
                             });
                           }
                         }}
-                        className="border p-1 rounded w-24 cursor-pointer bg-blue-200"
                       />
                     </td>
                   </tr>
@@ -198,22 +205,22 @@ const VerifiedAllemployee = () => {
                 </p>
 
                 {/* Adjust Salary */}
-                <p className=" flex border p-2">
+                <p className=" flex  justify-between p-2">
+                  <span className="font-bold">Salary Adjuest</span>
                   <input
                     type="number"
+                    className="border p-1 rounded w-24"
                     defaultValue={user.salary}
                     min={user.salary + 1}
-                    onBlur={(e) => {
-                      const newSalary = parseInt(e.target.value);
-
-                      if (newSalary > 0) {
+                    onChange={(e) => setSalary(parseInt(e.target.value))}
+                    onBlur={() => {
+                      if (salary > user.salary) {
                         updateSalaryMutation.mutate({
                           id: user._id,
-                          // ✅ Passing object to API call (correct)
+                          newSalary: salary,
                         });
                       }
                     }}
-                    className="border p-1 rounded w-24 cursor-pointer bg-blue-200"
                   />
                 </p>
               </div>

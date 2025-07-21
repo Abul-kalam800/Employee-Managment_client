@@ -1,16 +1,19 @@
 import React, { use, useState } from "react";
 import { Form, useForm } from "react-hook-form";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import useAuth from "../Hook/useAuth";
 import axios from "axios";
 import useAxios from "../Hook/useAxios";
 import Swal from "sweetalert2";
 import { FcGoogle } from "react-icons/fc";
+import { GoogleAuthProvider } from "firebase/auth";
 
 const Register = () => {
-  const { creatUser, userProfile} = useAuth();
+  const { user, creatUser, userProfile, signwithGoogle } = useAuth();
   const [profilePic, setProfilePic] = useState();
   const axioesInstance = useAxios();
+  const providerGoogle = new GoogleAuthProvider();
+  const navigation = useNavigate();
   const {
     register,
 
@@ -24,33 +27,36 @@ const Register = () => {
     creatUser(email, password)
       .then(async (result) => {
         console.log(result.user);
-       const profileUpdate = {
-       displayName:data.name,
-        photoURL:profilePic
-       }
+        const profileUpdate = {
+          displayName: data.name,
+          photoURL: profilePic,
+        };
+        // profile update 
         userProfile(profileUpdate)
-        .then(()=>{
-          console.log('profile update')
-        })
-        .catch(error=>{
-          console.log(error)
-        })
-        
+          .then(() => {
+            console.log("profile update");
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+
         // user info
         const userInfo = {
           email,
-          name:data.name,
+          name: data.name,
           bank_account: data.Account,
-          salary: parseInt(data.Salary) ,
+          salary: parseInt(data.Salary),
           role: data.Role,
           Desiganation: data.Desigation,
           photo: profilePic,
-          isVarified:false,
-          status:'pending',
+          isVarified: false,
+          status: "pending",
         };
+        
         console.log(userInfo);
         const userRes = await axioesInstance.post("/users", userInfo);
         console.log("user data save ", userRes.data);
+        navigation('/')
       })
       .catch((error) => {
         console.log(error.message);
@@ -64,7 +70,33 @@ const Register = () => {
       timer: 1500,
     });
   };
-// upload image handle 
+
+  //gogle sign in 
+  const handleGoogle = () => {
+    const userData = {
+      name: user.displayName,
+      email: user.email,
+      photo: user.photoURL,
+    };
+    signwithGoogle(providerGoogle)
+      .then(async (result) => {
+        await axioesInstance.post("/social-login", userData);
+        Swal.fire({
+          position: "top-center",
+          icon: "success",
+          title: "successfully google-login",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        navigation('/')
+
+        console.log(result.user);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
+  // upload image handle
   const uploadImagehandle = async (e) => {
     const image = e.target.files[0];
     console.log(image);
@@ -231,10 +263,11 @@ const Register = () => {
         <button
           aria-label="Login with Google"
           type="button"
-          className="flex items-center justify-center w-full p-2 border rounded-md focus:ring-2 focus:ring-offset-1 dark:border-gray-600 focus:dark:ring-violet-600"
+          className="flex items-center justify-center w-full p-2 border rounded-md focus:ring-2 focus:ring-offset-1 dark:border-gray-600 focus:dark:ring-violet-600 cursor-pointer"
           fdprocessedid="ea7aqa"
+          onClick={handleGoogle}
         >
-       <FcGoogle size={30} />
+          <FcGoogle size={30} />
           <p>Login with Google</p>
         </button>
       </div>

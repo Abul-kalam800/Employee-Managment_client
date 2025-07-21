@@ -46,7 +46,7 @@ const Dashboard = () => {
      <div className="max-w-7xl mx-auto">
      <div className="flex justify-between items-center border-b-2">
        <Logo></Logo>
-        <button onClick={() => setIsOpen(!isOpen)} className="btn bg-blue-300 p-3 "><GrMenu size={25}/> </button>
+        <button onClick={() => setIsOpen(!isOpen)} className="btn bg-blue-300 p-3 cursor-pointer "><GrMenu size={25}/> </button>
      </div >
       <div className="my-10 ">
          <Outlet></Outlet>
