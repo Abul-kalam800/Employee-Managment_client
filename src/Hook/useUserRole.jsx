@@ -6,11 +6,11 @@ const useUserRole = () => {
   const { user, loading } = useAuth();
  const axioesInstance = useAxios();
 
-  const { data: role="admin", roleLoading } = useQuery({
+  const { data: role='', roleLoading } = useQuery({
     enabled: !!user?.email && !loading, // Query fires only if user email is ready
-    queryKey: ["/employee", user?.email],
+    queryKey: ["employee", user?.email],
     queryFn: async () => {
-      const res = await axioesInstance.get(`/allemployee/${user?.email}/role`);
+      const res = await axioesInstance.get(`/users/${user?.email}/role`);
       return res.data.role;
     },
   });

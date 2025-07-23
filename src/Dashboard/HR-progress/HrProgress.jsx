@@ -49,7 +49,7 @@ const HrProgress = () => {
         </select>
 
         <select
-          className="border p-2 rounded"
+          className="border p-2 rounded text-xs md:text-lg"
           value={selectedMonth}
           onChange={(e) => setSelectedMonth(e.target.value)}
         >
@@ -73,13 +73,14 @@ const HrProgress = () => {
       {workRecords.length === 0 ? (
         <p>No work records found.</p>
       ) : (
-        <table className="w-full border text-left">
+       <div className="overflow-x-auto my-4">
+         <table className="w-full border text-left">
           <thead>
             <tr>
-              <th className="border p-2">Employee</th>
-              <th className="border p-2">Month</th>
-              <th className="border p-2">Work Details</th>
-              <th className="border p-2">Date</th>
+              <th className="border p-2 text-xs md:text-lg ">Employee</th>
+              <th className="border p-2 text-xs md:text-lg ">Month</th>
+              <th className="border p-2 text-xs md:text-lg ">Work Details</th>
+              <th className="border p-2 text-xs md:text-lg ">Date</th>
             </tr>
           </thead>
           <tbody>
@@ -93,6 +94,7 @@ const HrProgress = () => {
             ))}
           </tbody>
         </table>
+       </div>
       )}
     </div>
   );

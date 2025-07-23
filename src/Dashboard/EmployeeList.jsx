@@ -40,11 +40,11 @@ const EmployeeList = () => {
 
   if (isLoading) return <LoadingSpnieer></LoadingSpnieer>;
 
-  return (
-    <div className="p-4 overflow-x-auto">
-      <h1 className="text-4xl font-bold mb-10 text-center pb-5 border-dotted border-b-4 border-blue-500 w-5/12 mx-auto ">
+  return (<>
+    <h1 className="text-2xl md:text-4xl font-bold mb-10 text-center pb-5 border-dotted border-b-4 border-blue-500 w-5/12 mx-auto ">
         Employee List
       </h1>
+    <div className="p-4 overflow-x-auto">
       <table className="min-w-full bg-white border rounded">
         <thead className="bg-gray-100">
           <tr>
@@ -106,6 +106,7 @@ const EmployeeList = () => {
         </tbody>
       </table>
     </div>
+    </>
   );
 };
 

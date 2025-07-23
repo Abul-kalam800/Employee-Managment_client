@@ -5,16 +5,19 @@ import useAxios from "../../Hook/useAxios";
 import Swal from "sweetalert2";
 const CheckoutForm = ({
   salary,
-month,setYear,year,
+  month,
+  year,
   setIsModalOpen,
-  email,name,id,setMonth
-
+  email,
+  name,
+  id,
+  setMonth,
 }) => {
   const stripe = useStripe();
   const elements = useElements();
   const [errormsg, setErrormsg] = useState("");
   const [loading, setLoading] = useState(false);
-  console.log(salary);
+ 
   const axioesInstance = useAxios();
   const handleSubmitform = async (event) => {
     // Block native form submission.
@@ -65,7 +68,7 @@ month,setYear,year,
       alert(result.error.message);
     } else {
       if (result.paymentIntent.status === "succeeded") {
-        console.log('payment successfully')
+        console.log("payment successfully");
       }
     }
     console.log("res from intent ", res);
@@ -78,7 +81,6 @@ month,setYear,year,
         timer: 1500,
       });
 
-
     const paymentData = {
       employeeId: id,
       name,
@@ -87,10 +89,9 @@ month,setYear,year,
       month,
       year,
       transactionId,
-    
     };
 
-     axioesInstance.post("/payroll", paymentData).then((res) => {
+    axioesInstance.post("/payroll", paymentData).then((res) => {
       if (res.data.result.insertedId) {
         Swal.fire({
           position: "top-end",
@@ -101,14 +102,11 @@ month,setYear,year,
         });
       }
     });
-    console.log('successfully all')
+    console.log("successfully all");
 
     setIsModalOpen(false);
     setMonth("");
-    setYear("");
   };
-
-
 
   //   const handlePayment = async () => {
   //   // Simulate payment completion after API call

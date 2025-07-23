@@ -3,9 +3,9 @@ import logo from "../../src/assets/logo.png";
 import { NavLink } from "react-router";
 const Logo = () => {
   return (
-    <div  className="flex items-center p-2">
+    <div  className="flex items-center">
       <NavLink to='/'>
-        <img src={logo} alt="logo" className=" w-26 lg:w-[150px]" />
+        <img src={logo} alt="logo" className=" w-16 lg:w-[150px]" />
       </NavLink>
     </div>
   );

@@ -19,6 +19,7 @@ import DashboardBanner from "../Dashboard/DashboardBanner";
 import Forbidden from "../Pages/forbiddenPage/Forbidden";
 import AdminRouter from "../PrivetRouter/adminRouter/AdminRouter";
 import ErrorPage from "../Pages/Error404page/ErrorPage";
+import HrRouter from "../PrivetRouter/hrRouter/HrRouter";
 
 export const router = createBrowserRouter([
   {
@@ -31,12 +32,12 @@ export const router = createBrowserRouter([
         Component: HomePage,
       },
       {
-        path:'/forbidden',
-        Component:Forbidden,
+        path: "/forbidden",
+        Component: Forbidden,
       },
       {
-        path:'/contactus',
-        Component:ErrorPage
+        path: "/contactus",
+        Component: ContactUs,
       },
       {
         path: "/login",
@@ -50,47 +51,72 @@ export const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element:<PrivetRouter><Dashboard></Dashboard></PrivetRouter>,
-    errorElement:ErrorPage,
-    errorElement:Forbidden,
+    element: (
+      <PrivetRouter>
+        <Dashboard></Dashboard>
+      </PrivetRouter>
+    ),
+
     children: [
       {
-        index:true,
-        Component:DashboardBanner
+        index: true,
+        Component: DashboardBanner,
       },
       {
         path: "work-sheet",
-        Component:WorkSheet
+        Component: WorkSheet,
       },
       {
         path: "employeeList",
-        Component: EmployeeList,
+        // Component: EmployeeList,
+        element: (
+        
+            <EmployeeList></EmployeeList>
+          
+        ),
       },
       {
-        path:'paymenthistory',
-        Component:PaymentHistory
+        path: "paymenthistory",
+
+        Component: PaymentHistory,
       },
       {
-        path:'employeedetails/:id',
-        Component:EmployeeDetails
-      },
-      {path:'hrprogress',
-        Component:HrProgress
+        path: "employeedetails/:id",
+        Component: EmployeeDetails,
       },
       {
-        path:'verifiedallemployee',
-        // Component:VerifiedAllemployee
-        element:<AdminRouter><VerifiedAllemployee></VerifiedAllemployee></AdminRouter>
+        path: "hrprogress",
+        element: (
+          
+            <HrProgress></HrProgress>
+        
+        ),
       },
       {
-        path:'paymentpayroll',
-        // Component:PaymentPayroll
-        element:<AdminRouter><PaymentPayroll></PaymentPayroll></AdminRouter>
+        path: "verifiedallemployee",
+
+        element: (
+   
+            <VerifiedAllemployee></VerifiedAllemployee>
+      
+        ),
       },
       {
-        path:'adminmessage',
-       element:<AdminRouter><AdminMessage></AdminMessage></AdminRouter>
-      }
+        path: "paymentpayroll",
+
+        element: (
+         
+            <PaymentPayroll></PaymentPayroll>
+         
+        ),
+      },
+      {
+        path: "adminmessage",
+        element: (
+              <AdminMessage></AdminMessage>
+        
+        ),
+      },
     ],
   },
 ]);

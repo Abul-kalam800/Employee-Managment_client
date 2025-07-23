@@ -4,13 +4,20 @@ import { useState } from "react";
 import CheckoutForm from "./CheckoutForm";
 import { loadStripe } from "@stripe/stripe-js";
 
-
 const Paymodal = ({ isModalOpen, setIsModalOpen, emp }) => {
-  const { name, salary, email,_id } = emp;
+  const { name, salary, email, _id } = emp;
 
   const [month, setMonth] = useState("");
-  const [year, setYear] = useState("");
+  const currentYear = new Date().getFullYear();
+  const startYear = 2000;
+
+  const years = Array.from(
+    { length: currentYear - startYear + 1 },
+    (_, i) => startYear + i
+  );
   const stripePromies = loadStripe(import.meta.env.VITE_STRIPE_SK_KEY);
+  //  for year
+  const [selectedYear, setSelectedYear] = useState("");
 
   return (
     <div>
@@ -19,33 +26,48 @@ const Paymodal = ({ isModalOpen, setIsModalOpen, emp }) => {
           <div className="bg-white p-6 rounded-lg shadow-lg w-80">
             <h2 className="text-xl font-semibold mb-4 bg-blue-400">{name}</h2>
             <p className="mb-2 font-bold">Salary: {salary} USD</p>
-
-            <input
-              type="text"
-              placeholder="Month (e.g., July)"
+            <select
+              className="border p-2 rounded text-xs md:text-lg"
               value={month}
               onChange={(e) => setMonth(e.target.value)}
-              className="w-full border p-2 mb-2 rounded"
-            />
-            <input
-              type="text"
-              placeholder="Year (e.g., 2025)"
-              value={year}
-              onChange={(e) => setYear(e.target.value)}
-              className="w-full border p-2 mb-4 rounded"
-            />
+            >
+              <option value="January">January</option>
+              <option value="February">February</option>
+              <option value="March">March</option>
+              <option value="April">April</option>
+              <option value="May">May</option>
+              <option value="June">June</option>
+              <option value="July">July</option>
+              <option value="August">August</option>
+              <option value="September">September</option>
+              <option value="October">October</option>
+              <option value="November">November</option>
+              <option value="December">December</option>
+            </select>
+            <select
+              id="year"
+              value={selectedYear}
+              onChange={(e) => setSelectedYear(e.target.value)}
+              className="border p-2 rounded"
+            >
+              <option value="">-- Select Year --</option>
+              {years.map((year) => (
+                <option key={year} value={year}>
+                  {year}
+                </option>
+              ))}
+            </select>
+
             <Elements stripe={stripePromies}>
               <CheckoutForm
                 salary={salary}
                 setIsModalOpen={setIsModalOpen}
                 setMonth={setMonth}
-                setYear={setYear}
                 month={month}
-                year={year}
+                year={selectedYear}
                 email={email}
                 name={name}
                 id={_id}
-                
               ></CheckoutForm>
             </Elements>
             <div className="flex justify-between space-x-4">

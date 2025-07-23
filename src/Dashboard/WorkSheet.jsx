@@ -124,11 +124,11 @@ const WorkSheet = () => {
   if (loading || !user) return <LoadingSpnieer></LoadingSpnieer>
 
   if (isLoading) return <LoadingSpnieer></LoadingSpnieer>
-  console.log(user.email);
+ 
 
   return (
     <div className="p-4 max-w-6xl mx-auto">
-      <h1 className="text-4xl font-bold border-dotted border-b-4 border-blue-500 mb-10 w-5/12 mx-auto pb-5 text-center">
+      <h1 className="text-2xl md:text-4xl font-bold border-dotted border-b-4 border-blue-500 mb-10 w-9/12 mx-auto pb-5 text-center">
         Employee work-sheet
       </h1>
       <div className="flex flex-col md:flex-row items-center gap-4 mb-6 bg-green-300 p-5">
