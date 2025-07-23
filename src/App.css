@@ -31,7 +31,3 @@
     transform: translateX(20px);
   }
 }
-.active{
-    border-bottom: 2px solid rgb(164, 235, 164);
-    border-radius: 10px;
-}

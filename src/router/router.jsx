@@ -97,7 +97,7 @@ export const router = createBrowserRouter([
 
         element: (
    
-            <VerifiedAllemployee></VerifiedAllemployee>
+           <AdminRouter> <VerifiedAllemployee></VerifiedAllemployee></AdminRouter>
       
         ),
       },
@@ -106,14 +106,14 @@ export const router = createBrowserRouter([
 
         element: (
          
-            <PaymentPayroll></PaymentPayroll>
+            <AdminRouter><PaymentPayroll></PaymentPayroll></AdminRouter>
          
         ),
       },
       {
         path: "adminmessage",
         element: (
-              <AdminMessage></AdminMessage>
+             <AdminRouter> <AdminMessage></AdminMessage></AdminRouter>
         
         ),
       },
