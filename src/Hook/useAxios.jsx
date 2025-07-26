@@ -7,7 +7,7 @@ const axioesInstance = axios.create({
 const useAxios = () => {
     const {user }=useAuth()
     axioesInstance.interceptors.request.use(config=>{
-        config.headers.Authorization=`Bearer${user.accessToken}`
+        config.headers.Authorization=`Bearer ${user.accessToken}`
         return config
 
     }),(error)=>{

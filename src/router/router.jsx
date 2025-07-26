@@ -19,7 +19,6 @@ import DashboardBanner from "../Dashboard/DashboardBanner";
 import Forbidden from "../Pages/forbiddenPage/Forbidden";
 import AdminRouter from "../PrivetRouter/adminRouter/AdminRouter";
 import ErrorPage from "../Pages/Error404page/ErrorPage";
-import HrRouter from "../PrivetRouter/hrRouter/HrRouter";
 
 export const router = createBrowserRouter([
   {
@@ -63,17 +62,13 @@ export const router = createBrowserRouter([
         Component: DashboardBanner,
       },
       {
-        path: "work-sheet",
+        path: "worksheet",
         Component: WorkSheet,
       },
       {
         path: "employeeList",
-        // Component: EmployeeList,
-        element: (
-        
-            <EmployeeList></EmployeeList>
-          
-        ),
+
+        element: <EmployeeList></EmployeeList>,
       },
       {
         path: "paymenthistory",
@@ -86,35 +81,32 @@ export const router = createBrowserRouter([
       },
       {
         path: "hrprogress",
-        element: (
-          
-            <HrProgress></HrProgress>
-        
-        ),
+        element: <HrProgress></HrProgress>,
       },
       {
         path: "verifiedallemployee",
 
         element: (
-   
-           <AdminRouter> <VerifiedAllemployee></VerifiedAllemployee></AdminRouter>
-      
+          <AdminRouter>
+            <VerifiedAllemployee></VerifiedAllemployee>
+          </AdminRouter>
         ),
       },
       {
         path: "paymentpayroll",
 
         element: (
-         
-            <AdminRouter><PaymentPayroll></PaymentPayroll></AdminRouter>
-         
+          <AdminRouter>
+            <PaymentPayroll></PaymentPayroll>
+          </AdminRouter>
         ),
       },
       {
         path: "adminmessage",
         element: (
-             <AdminRouter> <AdminMessage></AdminMessage></AdminRouter>
-        
+          <AdminRouter>
+            <AdminMessage></AdminMessage>
+          </AdminRouter>
         ),
       },
     ],

@@ -28,9 +28,10 @@ const HrProgress = () => {
   if (isLoading) return <LoadingSpnieer></LoadingSpnieer>
   return (
     <div className="max-w-6xl mx-auto p-4">
-      <h2 className="text-2xl font-semibold mb-4 bg-blue-400 p-5 md:text-4xl">
+      <h2 className="text-2xl md:text-4xl font-bold mb-10 text-center pb-5 border-dotted border-b-4 border-blue-500 md:w-6/12 mx-auto p-2">
         Employee Work Records
       </h2>
+      <p className="text-center mx-auto md:w-8/12 mb-10">Here hr can see all employee work data recorded. who are worked to much who implack to much company hr can justify from hre. also can employee name select and can also month select can see data </p>
 
       {/* Filters */}
       <div className="flex gap-4 mb-4">
@@ -76,7 +77,7 @@ const HrProgress = () => {
        <div className="overflow-x-auto my-4">
          <table className="w-full border text-left">
           <thead>
-            <tr>
+            <tr className="bg-purple-600 text-white">
               <th className="border p-2 text-xs md:text-lg ">Employee</th>
               <th className="border p-2 text-xs md:text-lg ">Month</th>
               <th className="border p-2 text-xs md:text-lg ">Work Details</th>

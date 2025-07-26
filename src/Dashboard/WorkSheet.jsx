@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
+import { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import useAxios from "../Hook/useAxios";
@@ -32,6 +33,7 @@ const WorkSheet = () => {
       return res.data;
     },
   });
+ 
   // add data
 
   const addWorkMutation = useMutation({
@@ -128,7 +130,7 @@ const WorkSheet = () => {
 
   return (
     <div className="p-4 max-w-6xl mx-auto">
-      <h1 className="text-2xl md:text-4xl font-bold border-dotted border-b-4 border-blue-500 mb-10 w-9/12 mx-auto pb-5 text-center">
+      <h1 className="text-2xl md:text-4xl font-bold mb-10 text-center pb-5 border-dotted border-b-4 border-blue-500 md:w-6/12 mx-auto p-2">
         Employee work-sheet
       </h1>
       <div className="flex flex-col md:flex-row items-center gap-4 mb-6 bg-green-300 p-5">
@@ -150,7 +152,7 @@ const WorkSheet = () => {
           placeholder="Hours Worked"
           value={hoursWorked}
           onChange={(e) => setHoursWorked(e.target.value)}
-          className="border px-2 py-1 rounded w-24"
+          className="border px-5 py-1 rounded w-30"
           required
         />
         <DatePicker
@@ -190,9 +192,9 @@ const WorkSheet = () => {
 
       {/* Table */}
       <div className="overflow-x-auto">
-        <table className="w-full table-auto border">
+        <table className="min-w-full table-auto border">
           <thead>
-            <tr className="bg-gray-200">
+            <tr className="bg-purple-600 text-white">
               <th className="p-2 border">Task</th>
               <th className="p-2 border">Hours Worked</th>
               <th className="p-2 border">Date</th>
@@ -201,7 +203,7 @@ const WorkSheet = () => {
             </tr>
           </thead>
           <tbody>
-            {works.map((work) => (
+            {works?.map?.((work) => (
               <tr key={work._id}>
                 <td className="p-2 border">{work.task}</td>
                 <td className="p-2 border">{work.hoursWorked}</td>

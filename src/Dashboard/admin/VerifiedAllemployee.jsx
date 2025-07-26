@@ -56,7 +56,7 @@ const VerifiedAllemployee = () => {
   return (
     <div className="max-w-6xl mx-auto p-4">
       <div className="flex flex-col mb-4">
-        <h2 className="text-xl  md:text-4xl font-bold mb-4 bg-blue-100 p-2 text-center">
+        <h2 className="text-2xl md:text-4xl font-bold mb-10 text-center pb-5 border-dotted border-b-4 border-blue-500 md:w-6/12 mx-auto p-2">
           All Verified Employees & HR
         </h2>
         <p className="text-center mx-auto">
@@ -76,7 +76,7 @@ const VerifiedAllemployee = () => {
           <div className="p-4 max-w-6xl mx-auto overflow-x-auto mt-5">
             <table className="w-full border">
               <thead>
-                <tr>
+                <tr className="bg-purple-600 text-white">
                   <th className="border p-2">Name</th>
                   <th className="border p-2">Role</th>
                   <th className="border p-2">Salary</th>

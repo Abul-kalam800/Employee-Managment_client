@@ -26,7 +26,7 @@ const Register = () => {
     const password = data.password;
     creatUser(email, password)
       .then(async (result) => {
-        console.log(result.user);
+      
         const profileUpdate = {
           displayName: data.name,
           photoURL: profilePic,
@@ -53,15 +53,14 @@ const Register = () => {
           status: "pending",
         };
         
-        console.log(userInfo);
-        const userRes = await axioesInstance.post("/users", userInfo);
-        console.log("user data save ", userRes.data);
+        await axioesInstance.post("/users", userInfo);
+        console.log("user data save",userInfo);
         navigation('/')
       })
       .catch((error) => {
         console.log(error.message);
       });
-    console.log(data);
+   
     Swal.fire({
       position: "top-center",
       icon: "success",
@@ -73,13 +72,14 @@ const Register = () => {
 
   //gogle sign in 
   const handleGoogle = () => {
-    const userData = {
-      name: user.displayName,
-      email: user.email,
-      photo: user.photoURL,
-    };
+    
     signwithGoogle(providerGoogle)
       .then(async (result) => {
+        const userData = {
+      name:   result.user.displayName,
+      email:  result.user.email,
+      photo:  result.user.photoURL,
+    };
         await axioesInstance.post("/social-login", userData);
         Swal.fire({
           position: "top-center",

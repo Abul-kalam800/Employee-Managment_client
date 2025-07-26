@@ -27,7 +27,7 @@ const Header = () => {
   };
 
   return (
-    <header className="p-2 bg-gray-200 text-gray-800 shadow-2xl">
+    <header className="p-2 bg-gray-200 text-gray-800 px-5">
       <div className="container flex justify-between h-12 mx-auto">
     
          <Logo></Logo>
@@ -44,7 +44,7 @@ const Header = () => {
             </NavLink>
           </li>
         </ul>
-        <div className="">
+        <div className="flex ">
         {user ? (<>
        
             <img src={user?.photoURL}  className="w-12 h-12 rounded-full cursor-pointer relative" onClick={handlePhoto}/>
@@ -74,7 +74,7 @@ const Header = () => {
             </div>
           </>
         )}
-        </div>
+       
 
         <button onClick={handleManu} className="p-4 lg:hidden relative">
           <svg
@@ -92,16 +92,17 @@ const Header = () => {
             ></path>
           </svg>
         </button>
+         </div>
         {open ? (
           <>
-            <ul className="absolute top-20 right-0 ">
+            <ul className="absolute top-16 right-0 bg-blue-300 py-5 ">
               <li>
                 <NavLink to="/dashboard" className="flex items-center px-4 mb-4">
                   Dashboard
                 </NavLink>
               </li>
               <li className="flex">
-                <NavLink to="/" className="flex items-center px-4 ">
+                <NavLink to="/contactus" className="flex items-center px-4 ">
                   Contact us
                 </NavLink>
               </li>
