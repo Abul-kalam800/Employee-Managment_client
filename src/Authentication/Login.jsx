@@ -6,23 +6,45 @@ import { FcGoogle } from "react-icons/fc";
 import { GoogleAuthProvider } from "firebase/auth";
 import useAxios from "../Hook/useAxios";
 import Swal from "sweetalert2";
+import axios from "axios";
 
 const Login = () => {
   const { signUser, signwithGoogle, user } = useAuth();
   const navigate = useNavigate();
   const axioesInstance = useAxios();
   const providerGoogle = new GoogleAuthProvider();
+  const [errormsg, setErrormsg] = useState("");
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm();
   const [errorMsg, setErrorMsg] = useState("");
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
+    // if any one fired 
+    const userData = {
+      email: data.email,
+      password: data.password,
+    };
+    try {
+      await axios.post("http://localhost:5000/login", userData);
+    } catch (err) {
+      if (err.response?.status === 403) {
+        return setErrormsg('you have fired please contact your admin')
+      }
+    }
+//  if no fired this code will excuide 
     signUser(data.email, data.password)
       .then((resule) => {
         console.log(resule.user);
         setErrorMsg("");
+        Swal.fire({
+          position: "top-center",
+          icon: "success",
+          title: "successfully login",
+          showConfirmButton: false,
+          timer: 1500,
+        });
         navigate("/");
       })
       .catch((error) => {
@@ -30,7 +52,6 @@ const Login = () => {
       });
     console.log(data);
   };
-  
 
   // login with google
   const handleLoginGoogle = () => {
@@ -41,8 +62,8 @@ const Login = () => {
           photo: result.user.photoURL,
           email: result.user.email,
         };
-        console.log(userData)
-        await axioesInstance.post("/social-login",userData);
+       
+        await axios.post("http://localhost:5000/social-login", userData);
         Swal.fire({
           position: "top-center",
           icon: "success",
@@ -90,6 +111,9 @@ const Login = () => {
             </a>
           </div>
         </div>
+        {errormsg && (
+          <p className="text-2xl font-bold text-red-600 my-10">{errormsg}</p>
+        )}
         <button
           className="block w-full p-3 cursor-pointer text-center rounded-sm dark:text-gray-50 dark:bg-violet-600"
           fdprocessedid="nkflyg"

@@ -94,7 +94,7 @@ const CheckoutForm = ({
     axioesInstance.post("/payroll", paymentData).then((res) => {
       if (res.data.result.insertedId) {
         Swal.fire({
-          position: "top-end",
+          position: "top-center",
           icon: "success",
           title: "Your payment request is done",
           showConfirmButton: false,

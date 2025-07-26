@@ -25,7 +25,7 @@ const Dashboard = () => {
   const { user, logOut } = useAuth();
   const handleClose = () => setIsOpen(false);
   const [logOpen, setLogOpen] = useState(false);
-  const { role,roleLoading } = useUserRole();
+  const { role,isLoading } = useUserRole();
   console.log(role);
   const hanldeLogout = () => {
     setLogOpen(!logOpen);
@@ -49,7 +49,7 @@ const Dashboard = () => {
             onClick={() => setIsOpen(!isOpen)}
             className="btn  p-3 cursor-pointer  "
           >
-            <GrMenu size={20} />{" "}
+            <GrMenu size={20} />
           </button>
           <div>
             {user && (
@@ -63,7 +63,7 @@ const Dashboard = () => {
           {logOpen ? (
             <button
               onClick={handleLogOut}
-              className="cursor-pointer btn bg-[#6600cc] px-4 py-2 text-white absolute top-30 right-30 duration-300 translate-3.5 transition -translate-y-2 ease-in-out"
+              className="cursor-pointer btn bg-[#6600cc] px-4 py-2 text-white absolute top-18 md:top-26 right-10 duration-300 translate-3.5 transition -translate-y-2 ease-in-out"
             >
               Log-out
             </button>
@@ -114,7 +114,7 @@ const Dashboard = () => {
                   </NavLink>
            
           
-              {!roleLoading && role === "Hr" && (
+              {!isLoading && role === "Hr" && (
                 <>
                   <NavLink to="/dashboard/employeeList">
                     <li className="text-lg text-white flex items-center gap-2">
@@ -130,7 +130,7 @@ const Dashboard = () => {
                 </>
               )}
 
-              {!roleLoading && role === "admin" && (
+              {!isLoading && role === "admin" && (
                 <>
                   <NavLink to="/dashboard/verifiedallemployee">
                     <li className="text-lg text-white flex items-center gap-2">

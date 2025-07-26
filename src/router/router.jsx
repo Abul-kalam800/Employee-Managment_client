@@ -19,6 +19,7 @@ import DashboardBanner from "../Dashboard/DashboardBanner";
 import Forbidden from "../Pages/forbiddenPage/Forbidden";
 import AdminRouter from "../PrivetRouter/adminRouter/AdminRouter";
 import ErrorPage from "../Pages/Error404page/ErrorPage";
+import HrRouter from "../PrivetRouter/hrRouter/HrRouter";
 
 export const router = createBrowserRouter([
   {
@@ -36,7 +37,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "/contactus",
-        Component: ContactUs,
+        element: (
+          <PrivetRouter>
+            <ContactUs></ContactUs>
+          </PrivetRouter>
+        ),
       },
       {
         path: "/login",
@@ -68,7 +73,7 @@ export const router = createBrowserRouter([
       {
         path: "employeeList",
 
-        element: <EmployeeList></EmployeeList>,
+        element: <HrRouter><EmployeeList></EmployeeList></HrRouter>,
       },
       {
         path: "paymenthistory",
@@ -81,7 +86,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "hrprogress",
-        element: <HrProgress></HrProgress>,
+        element: <HrRouter><HrProgress></HrProgress></HrRouter>,
       },
       {
         path: "verifiedallemployee",

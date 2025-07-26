@@ -53,7 +53,7 @@ const Register = () => {
           status: "pending",
         };
         
-        await axioesInstance.post("/users", userInfo);
+        await axios.post("http://localhost:5000/users", userInfo);
         console.log("user data save",userInfo);
         navigation('/')
       })
