@@ -27,7 +27,7 @@ const Login = () => {
       password: data.password,
     };
     try {
-      await axios.post("http://localhost:5000/login", userData);
+      await axios.post("https://employee-managment-server-nah4l8cxz-abul-kalam800s-projects.vercel.app/login", userData);
     } catch (err) {
       if (err.response?.status === 403) {
         return setErrormsg('you have fired please contact your admin')
@@ -63,7 +63,7 @@ const Login = () => {
           email: result.user.email,
         };
        
-        await axios.post("http://localhost:5000/social-login", userData);
+        await axios.post("https://employee-managment-server-nah4l8cxz-abul-kalam800s-projects.vercel.app/social-login", userData);
         Swal.fire({
           position: "top-center",
           icon: "success",

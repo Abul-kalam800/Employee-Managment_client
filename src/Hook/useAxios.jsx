@@ -3,7 +3,7 @@ import React from "react";
 import useAuth from "./useAuth";
 import { useNavigate } from "react-router";
 const axioesInstance = axios.create({
-  baseURL: "http://localhost:5000",
+  baseURL: "https://employee-managment-server-nah4l8cxz-abul-kalam800s-projects.vercel.app",
 });
 const useAxios = () => {
   const { user, logOut } = useAuth();

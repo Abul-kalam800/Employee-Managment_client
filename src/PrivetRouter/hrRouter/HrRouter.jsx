@@ -4,7 +4,7 @@ import useAuth from "../../Hook/useAuth";
 import { Navigate } from "react-router";
 import LoadingSpnieer from "../../Pages/spinnerPage/LoadingSpnieer";
 
-const HrRouter = ({ Children }) => {
+const HrRouter = ({ children }) => {
   const { role, roleLoading } = useUserRole();
 
   const { user, loading } = useAuth();
@@ -15,7 +15,7 @@ const HrRouter = ({ Children }) => {
     return <Navigate to="/forbidden"></Navigate>;
   }
 
-  return Children;
+  return <div>{children}</div>;
 };
 
 export default HrRouter;
