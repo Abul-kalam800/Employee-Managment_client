@@ -53,7 +53,7 @@ const Register = () => {
           status: "pending",
         };
         
-        await axios.post("http://localhost:5000/users", userInfo);
+        await axios.post("https://employee-managment-server-three.vercel.app/", userInfo);
         console.log("user data save",userInfo);
         navigation('/')
       })

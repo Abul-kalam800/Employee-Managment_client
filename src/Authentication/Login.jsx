@@ -27,7 +27,7 @@ const Login = () => {
       password: data.password,
     };
     try {
-      await axios.post("https://employee-managment-server-nah4l8cxz-abul-kalam800s-projects.vercel.app/login", userData);
+      await axios.post("https://employee-managment-server-three.vercel.app/login", userData);
     } catch (err) {
       if (err.response?.status === 403) {
         return setErrormsg('you have fired please contact your admin')
