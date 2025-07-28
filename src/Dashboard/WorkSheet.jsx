@@ -152,7 +152,7 @@ const WorkSheet = () => {
           placeholder="Hours Worked"
           value={hoursWorked}
           onChange={(e) => setHoursWorked(e.target.value)}
-          className="border px-5 py-1 rounded w-30"
+          className="flex  border px-5 py-2 rounded  w-full md:w-30 "
           required
         />
         <DatePicker
