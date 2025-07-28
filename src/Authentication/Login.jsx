@@ -63,7 +63,7 @@ const Login = () => {
           email: result.user.email,
         };
        
-        await axios.post("https://employee-managment-server-nah4l8cxz-abul-kalam800s-projects.vercel.app/social-login", userData);
+        await axios.post("https://employee-managment-server-three.vercel.app/social-login", userData);
         Swal.fire({
           position: "top-center",
           icon: "success",
@@ -73,7 +73,7 @@ const Login = () => {
         });
         navigate("/");
 
-        console.log(result.user);
+       
       })
       .catch((error) => {
         console.log(error.message);

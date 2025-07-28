@@ -17,21 +17,19 @@ const Header = () => {
   };
   const hanldeLogout = () => {
     logOut()
-    .then(() => {
-     
-      setLogopen(false)
-    })
-    .catch(error=>{
-      console.log(error.message)
-    });
+      .then(() => {
+        setLogopen(false);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
   };
 
   return (
     <header className="p-2 bg-gray-200 text-gray-800 px-5">
       <div className="container flex justify-between h-12 mx-auto">
-    
-         <Logo></Logo>
- 
+        <Logo></Logo>
+
         <ul className="items-stretch hidden space-x-3 lg:flex">
           <li className="flex">
             <NavLink to="/dashboard" className="flex items-center px-4 -mb-1">
@@ -44,60 +42,72 @@ const Header = () => {
             </NavLink>
           </li>
         </ul>
-        <div className="flex ">
-        {user ? (<>
-       
-            <img src={user?.photoURL}  className="w-12 h-12 rounded-full cursor-pointer relative" onClick={handlePhoto}/>
-      
-        {
-          logopen? 
-          <button onClick={hanldeLogout} className="cursor-pointer btn bg-[#6600cc] px-4 py-2 text-white absolute top-16 right-10 duration-300 translate-x-2 transition -translate-y-1 ease-in-out">Log-out</button>:''
-        }
-          </>
-        ) : (
-          <>
-            <div className="items-center flex-shrink-0 hidden lg:flex gap-5">
-              <Link
-                to="/login"
-                className="self-center px-8 py-3 rounded btn  hover:bg-[#00CC33]"
-                fdprocessedid="5all7o"
-              >
-                Login
-              </Link>
-              <Link
-                to="/register"
-                className="self-center px-8 py-3 font-semibold rounded bg-[#6600CC] hover:bg-[#00CC33] cursor-pointer"
-                fdprocessedid="bz1a8i"
-              >
-                Register
-              </Link>
-            </div>
-          </>
-        )}
-       
+        <div className="flex justify-center items-center ">
+          {user ? (
+            <>
+              <img
+                src={user?.photoURL}
+                className="w-12 h-12 rounded-full cursor-pointer relative"
+                onClick={handlePhoto}
+              />
 
-        <button onClick={handleManu} className="p-4 lg:hidden relative">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            className="w-6 h-6 dark:text-gray-800"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M4 6h16M4 12h16M4 18h16"
-            ></path>
-          </svg>
-        </button>
-         </div>
+              {logopen ? (
+                <button
+                  onClick={hanldeLogout}
+                  className="cursor-pointer btn bg-[#6600cc] px-4 py-2 text-white absolute top-16 right-10 duration-300 translate-x-2 transition -translate-y-1 ease-in-out"
+                >
+                  Log-out
+                </button>
+              ) : (
+                ""
+              )}
+            </>
+          ) : (
+            <>
+              <div className="items-center flex-shrink-0 justify-center lg:flex gap-5">
+                <Link
+                  to="/login"
+                  className="self-center px-8 py-3 rounded btn  hover:bg-[#00CC33]"
+                  fdprocessedid="5all7o"
+                >
+                  Login
+                </Link>
+                <Link
+                  to="/register"
+                  className="self-center px-8 py-3 font-semibold hidden lg:block rounded bg-[#6600CC] hover:bg-[#00CC33] cursor-pointer"
+                  fdprocessedid="bz1a8i"
+                >
+                  Register
+                </Link>
+              </div>
+            </>
+          )}
+
+          <button onClick={handleManu} className="p-4 lg:hidden relative">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              className="w-6 h-6 dark:text-gray-800"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M4 6h16M4 12h16M4 18h16"
+              ></path>
+            </svg>
+          </button>
+        </div>
         {open ? (
           <>
             <ul className="absolute top-16 right-0 bg-blue-300 py-5 ">
               <li>
-                <NavLink to="/dashboard" className="flex items-center px-4 mb-4">
+                <NavLink
+                  to="/dashboard"
+                  className="flex items-center px-4 mb-4"
+                >
                   Dashboard
                 </NavLink>
               </li>

@@ -2,7 +2,7 @@ import React, { use, useState } from "react";
 import { Form, useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router";
 import useAuth from "../Hook/useAuth";
-import axios from "axios";
+import axios, { Axios } from "axios";
 import useAxios from "../Hook/useAxios";
 import Swal from "sweetalert2";
 import { FcGoogle } from "react-icons/fc";
@@ -26,16 +26,13 @@ const Register = () => {
     const password = data.password;
     creatUser(email, password)
       .then(async (result) => {
-      
         const profileUpdate = {
           displayName: data.name,
           photoURL: profilePic,
         };
-        // profile update 
+        // profile update
         userProfile(profileUpdate)
-          .then(() => {
-           
-          })
+          .then(() => {})
           .catch((error) => {
             console.log(error);
           });
@@ -52,15 +49,18 @@ const Register = () => {
           isVarified: false,
           status: "pending",
         };
-        
-        await axios.post("https://employee-managment-server-three.vercel.app/", userInfo);
-        
-        navigation('/')
+
+        await axios.post(
+          "https://employee-managment-server-three.vercel.app/",
+          userInfo
+        );
+
+        navigation("/");
       })
       .catch((error) => {
         console.log(error.message);
       });
-   
+
     Swal.fire({
       position: "top-center",
       icon: "success",
@@ -70,17 +70,16 @@ const Register = () => {
     });
   };
 
-  //gogle sign in 
+  //gogle sign in
   const handleGoogle = () => {
-    
     signwithGoogle(providerGoogle)
       .then(async (result) => {
         const userData = {
-      name:   result.user.displayName,
-      email:  result.user.email,
-      photo:  result.user.photoURL,
-    };
-        await axioesInstance.post("/social-login", userData);
+          name: result.user.displayName,
+          email: result.user.email,
+          photo: result.user.photoURL,
+        };
+        await axios.post("https://employee-managment-server-three.vercel.app/social-login", userData);
         Swal.fire({
           position: "top-center",
           icon: "success",
@@ -88,7 +87,7 @@ const Register = () => {
           showConfirmButton: false,
           timer: 1500,
         });
-        navigation('/')
+        navigation("/");
 
         console.log(result.user);
       })
@@ -99,7 +98,6 @@ const Register = () => {
   // upload image handle
   const uploadImagehandle = async (e) => {
     const image = e.target.files[0];
-   
 
     const formData = new FormData();
     formData.append("image", image);
@@ -108,7 +106,7 @@ const Register = () => {
     }`;
     try {
       const res = await axios.post(imgeLoadUrl, formData);
-     
+
       if (res.data.success) {
         const imgUrl = res.data.data.url;
         setProfilePic(imgUrl);

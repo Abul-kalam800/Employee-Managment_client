@@ -11,7 +11,7 @@ const useUserRole = () => {
     queryKey: ["role", user?.email],
     queryFn: async () => {
       const res = await axioesInstance.get(`/users/${user?.email}/role`);
-      return res.data.role;
+      return res?.data?.role;
     },
   });
   

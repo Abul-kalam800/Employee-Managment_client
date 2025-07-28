@@ -25,17 +25,15 @@ const Dashboard = () => {
   const { user, logOut } = useAuth();
   const handleClose = () => setIsOpen(false);
   const [logOpen, setLogOpen] = useState(false);
-  const { role,isLoading } = useUserRole();
-  
+  const { role, isLoading } = useUserRole();
+
   const hanldeLogout = () => {
     setLogOpen(!logOpen);
   };
   // logOut
   const handleLogOut = () => {
     logOut()
-      .then(() => {
-       
-      })
+      .then(() => {})
       .catch((error) => {
         console.log(error.message);
       });
@@ -100,20 +98,18 @@ const Dashboard = () => {
                 </li>
               </NavLink>
 
-              
-                  <NavLink to="/dashboard/worksheet">
-                    <li className="text-lg text-white flex items-center gap-2">
-                      <HiClipboardList /> Employee-Work-Sheet
-                    </li>
-                  </NavLink>
+              <NavLink to="/dashboard/worksheet">
+                <li className="text-lg text-white flex items-center gap-2">
+                  <HiClipboardList /> Employee-Work-Sheet
+                </li>
+              </NavLink>
 
-                  <NavLink to="/dashboard/paymenthistory">
-                    <li className="text-lg text-white flex items-center gap-2">
-                      <HiCurrencyDollar /> Payment-History
-                    </li>
-                  </NavLink>
-           
-          
+              <NavLink to="/dashboard/paymenthistory">
+                <li className="text-lg text-white flex items-center gap-2">
+                  <HiCurrencyDollar /> Payment-History
+                </li>
+              </NavLink>
+
               {!isLoading && role === "Hr" && (
                 <>
                   <NavLink to="/dashboard/employeeList">
