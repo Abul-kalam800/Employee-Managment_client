@@ -39,7 +39,7 @@ const Login = () => {
         console.log(resule.user);
         setErrorMsg("");
         Swal.fire({
-          position: "top-center",
+          position: "center",
           icon: "success",
           title: "successfully login",
           showConfirmButton: false,
@@ -65,7 +65,7 @@ const Login = () => {
        
         await axios.post("https://employee-managment-server-three.vercel.app/social-login", userData);
         Swal.fire({
-          position: "top-center",
+          position: "center",
           icon: "success",
           title: "successfully google-login",
           showConfirmButton: false,

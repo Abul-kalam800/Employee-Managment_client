@@ -62,7 +62,7 @@ const Register = () => {
       });
 
     Swal.fire({
-      position: "top-center",
+      position: "center",
       icon: "success",
       title: "Your work has been saved",
       showConfirmButton: false,
@@ -81,7 +81,7 @@ const Register = () => {
         };
         await axios.post("https://employee-managment-server-three.vercel.app/social-login", userData);
         Swal.fire({
-          position: "top-center",
+          position: "center",
           icon: "success",
           title: "successfully google-login",
           showConfirmButton: false,
