@@ -26,7 +26,7 @@ const Dashboard = () => {
   const handleClose = () => setIsOpen(false);
   const [logOpen, setLogOpen] = useState(false);
   const { role,isLoading } = useUserRole();
-  console.log(role);
+  
   const hanldeLogout = () => {
     setLogOpen(!logOpen);
   };

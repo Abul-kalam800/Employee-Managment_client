@@ -5,10 +5,6 @@ import { IoGrid } from "react-icons/io5";
 import { FaTableList } from "react-icons/fa6";
 import LoadingSpnieer from "../../Pages/spinnerPage/LoadingSpnieer";
 
-// const fetchUsers = async () => {
-//   const res = await fetch('/api/users/verified');
-//   return res.json();
-// };
 
 const VerifiedAllemployee = () => {
   const [isTableView, setIsTableView] = useState(true);
@@ -26,6 +22,7 @@ const VerifiedAllemployee = () => {
   const fireUserMutation = useMutation({
     mutationFn: async (id) => {
       await axioesInstance(`/user/fire/${id}`, { method: "PATCH" });
+      
     },
     onSuccess: () => queryClient.invalidateQueries(["verifiedUsers"]),
   });

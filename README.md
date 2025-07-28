@@ -19,7 +19,7 @@ A modern and responsive Employee Management web application built using **React.
 
 ---
 
-## 🚀 Key Features
+## 🚀 Top 10  Features
 
 - 🔐 **Secure Authentication** using Firebase (JWT based login)
 - 🧑‍💼 **Role-Based Access** (Admin, HR, and Employee with different permissions)

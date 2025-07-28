@@ -1,65 +1,73 @@
-import { useQuery, useQueryClient } from "@tanstack/react-query";
-import React from "react";
+
+import React, { useEffect, useState } from "react";
 import useAxios from "../../Hook/useAxios";
 import { useParams } from "react-router";
 import {
   Bar,
   BarChart,
   CartesianGrid,
+  Legend,
   ResponsiveContainer,
   Tooltip,
   XAxis,
   YAxis,
 } from "recharts";
-import LoadingSpnieer from "../../Pages/spinnerPage/LoadingSpnieer";
+
 
 const EmployeeDetails = () => {
-    const queryClient = useQueryClient();
+  
   const axioesInstance = useAxios();
   const { id } = useParams();
-  console.log(id);
-  const { data: singleEmployee, isLoading } = useQuery({
-    queryKey: ["employeedetails"],
-    queryFn: async () => {
-      const res = await axioesInstance(`/employeedetails/${id}`);
-      return res.data;
-    },
-  });
-  if (isLoading) {
-    <LoadingSpnieer></LoadingSpnieer>
-  }
-  console.log(singleEmployee);
-  return (
-    <div className="max-w-4xl mx-auto p-4">
-      <div className="flex items-center mb-6">
-        <img
-          src={singleEmployee?.photo}
-          alt={singleEmployee?.name}
-          className="w-24 h-24 rounded-full object-cover mr-6"
-        />
-        <div>
-          <h1 className="text-2xl font-bold">{singleEmployee?.name}</h1>
-          <p className="text-gray-600">{singleEmployee?.Desiganation}</p>
-        </div>
-      </div>
+  const [user, setUser] = useState(null);
+  const [payroll, setPayroll] = useState([]);
+ 
 
-      <div>
-        <h2 className="text-xl font-semibold mb-4">Salary History</h2>
-        <ResponsiveContainer width="100%" height={300}>
-          <BarChart >
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis
-              dataKey="month"
-              label={{ value: "Month", position: "insideBottom", offset: -5 }}
-            />
-            <YAxis
-              label={{ value: "Salary", angle: -90, position: "insideLeft" }}
-            />
-            <Tooltip />
-            <Bar dataKey="salary" fill="#4f46e5" />
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
+
+    useEffect(() => {
+    axioesInstance.get(`/employee/${id}`)
+      .then(res => {
+        setUser(res.data.user);
+        setPayroll(res.data.payrollHistory);
+      })
+      .catch(err => console.error(err));
+  }, [id]);
+  
+
+
+
+
+   const chartData = payroll.map(entry => ({
+    month: `${entry.month} ${entry.year}`,
+    salary: entry.salary,
+  }));
+
+
+ return (
+    <div className="p-6">
+      {user && (
+        <div className="mb-10">
+          <img
+            src={user.photo}
+            alt={user.name}
+            className="w-28 h-28 rounded-full border mb-4"
+          />
+          <h2 className="text-2xl font-bold">{user.name}</h2>
+          <p className="text-gray-600">{user.Desiganation}</p>
+          <p className="text-sm text-gray-500">{user.email}</p>
+        </div>
+      )}
+
+      <h3 className="text-xl font-semibold mb-4">Salary overview</h3>
+      <ResponsiveContainer width="100%" height={300}>
+        <BarChart data={chartData}>
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="month" />
+          <YAxis />
+          <Tooltip />
+          <Legend />
+          <Bar dataKey="salary" fill="#60a5fa" name="Salary" />
+        </BarChart>
+      </ResponsiveContainer>
     </div>
   );
 };
