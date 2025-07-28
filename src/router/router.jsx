@@ -24,7 +24,7 @@ import HrRouter from "../PrivetRouter/hrRouter/HrRouter";
 export const router = createBrowserRouter([
   {
     path: "/",
-    Component: MainLayout,
+    element: <MainLayout></MainLayout>,
     errorElement: ErrorPage,
     children: [
       {
@@ -49,8 +49,9 @@ export const router = createBrowserRouter([
       },
       {
         path: "/register",
-        Component: Register,
+        Component:Register,
       },
+     
     ],
   },
   {
