@@ -4,6 +4,7 @@ import useAxios from "../../Hook/useAxios";
 import { IoGrid } from "react-icons/io5";
 import { FaTableList } from "react-icons/fa6";
 import LoadingSpnieer from "../../Pages/spinnerPage/LoadingSpnieer";
+import Swal from "sweetalert2";
 
 
 const VerifiedAllemployee = () => {
@@ -22,9 +23,13 @@ const VerifiedAllemployee = () => {
   const fireUserMutation = useMutation({
     mutationFn: async (id) => {
       await axioesInstance(`/user/fire/${id}`, { method: "PATCH" });
-      
+
     },
-    onSuccess: () => queryClient.invalidateQueries(["verifiedUsers"]),
+    onSuccess: () => {
+      queryClient.invalidateQueries(["verifiedUsers"]),
+      Swal.fire("Fired!", "Employee has been fired successfully.", "success")
+    }
+      
   });
 
   const makeHRMutation = useMutation({
@@ -44,7 +49,26 @@ const VerifiedAllemployee = () => {
     },
     onSuccess: () => queryClient.invalidateQueries(["verifiedUsers"]),
   });
+ 
 
+  //  handle fire confirm 
+
+  const handleFire = async (user) => {
+  const confirm = await Swal.fire({
+    title: `Fire ${user.name}?`,
+    text: "This action cannot be undone!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonText: "Yes, Fire",
+    cancelButtonText: "Cancel",
+    confirmButtonColor: "#d33",
+    cancelButtonColor: "#3085d6",
+  });
+
+  if (confirm.isConfirmed) {
+   fireUserMutation.mutate(user._id);
+  }
+};
   // toggol btn
   const handleToggleView = () => setIsTableView(!isTableView);
 
@@ -112,11 +136,7 @@ const VerifiedAllemployee = () => {
                         <span className="text-red-500 font-bold">Fired</span>
                       ) : (
                         <button
-                          onClick={() => {
-                            if (confirm(`Fire ${user.name}?`)) {
-                              fireUserMutation.mutate(user._id);
-                            }
-                          }}
+                          onClick={()=>handleFire(user)}
                           className="bg-red-500 text-white px-2 py-1 rounded cursor-pointer"
                         >
                           Fire
@@ -190,11 +210,7 @@ const VerifiedAllemployee = () => {
                     <span className="text-red-500 font-bold">Fired</span>
                   ) : (
                     <button
-                      onClick={() => {
-                        if (confirm(`Fire ${user.name}?`)) {
-                          fireUserMutation.mutate(user._id);
-                        }
-                      }}
+                      onClick={()=>handleFire(user)}
                       className="bg-red-500 text-white px-2 py-1 rounded cursor-pointer flex "
                     >
                       Fire
