@@ -46,9 +46,9 @@ const CheckoutForm = ({
 
     if (error) {
       setErrormsg(error.message);
-      console.log("[error]", error);
+    
     } else {
-      console.log("[PaymentMethod]", paymentMethod);
+     
       setErrormsg("");
     }
     const res = await axioesInstance.post("/create-payment-intent", {
@@ -68,10 +68,10 @@ const CheckoutForm = ({
       alert(result.error.message);
     } else {
       if (result.paymentIntent.status === "succeeded") {
-        console.log("payment successfully");
+        
       }
     }
-    console.log("res from intent ", res);
+   
     if (!month || !year)
       return Swal.fire({
         position: "top-end",
@@ -102,7 +102,7 @@ const CheckoutForm = ({
         });
       }
     });
-    console.log("successfully all");
+  
 
     setIsModalOpen(false);
     setMonth("");

@@ -20,7 +20,7 @@ const useAxios = () => {
       return res;
     },
     (error) => {
-      console.log("response interceptor", error.status);
+     
       const status = error.status;
       if (status == 403) {
         navigation("/forbidden");

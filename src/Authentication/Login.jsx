@@ -50,7 +50,7 @@ const Login = () => {
       .catch((error) => {
         setErrorMsg(error.message);
       });
-    console.log(data);
+   
   };
 
   // login with google

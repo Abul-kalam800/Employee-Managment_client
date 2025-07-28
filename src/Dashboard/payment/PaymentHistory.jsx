@@ -9,7 +9,7 @@ const PaymentHistory = () => {
   const { user } = useAuth();
   const email = user?.email;
 
-  //    console.log(user.email)
+  
   const axioesInstance = useAxios();
   const [page, setPage] = useState(1);
   const { data, isLoading } = useQuery({
@@ -27,6 +27,7 @@ const PaymentHistory = () => {
 
   return (
     <>
+    <title>Payment-history</title>
       <h2 className="text-2xl md:text-4xl font-bold mb-10 text-center pb-5 border-dotted border-b-4 border-blue-500 md:w-6/12 mx-auto p-2">
         Payment History
       </h2>

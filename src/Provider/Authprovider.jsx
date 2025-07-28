@@ -53,7 +53,7 @@ const Authprovider = ({ children }) => {
       unsubscribe();
     };
   }, []);
-  console.log(user);
+ 
   return <Authcontex value={userInfo}>{children}</Authcontex>;
 };
 

@@ -34,7 +34,7 @@ const Register = () => {
         // profile update 
         userProfile(profileUpdate)
           .then(() => {
-            console.log("profile update");
+           
           })
           .catch((error) => {
             console.log(error);
@@ -54,7 +54,7 @@ const Register = () => {
         };
         
         await axios.post("https://employee-managment-server-three.vercel.app/", userInfo);
-        console.log("user data save",userInfo);
+        
         navigation('/')
       })
       .catch((error) => {
@@ -99,7 +99,7 @@ const Register = () => {
   // upload image handle
   const uploadImagehandle = async (e) => {
     const image = e.target.files[0];
-    console.log(image);
+   
 
     const formData = new FormData();
     formData.append("image", image);
@@ -108,7 +108,7 @@ const Register = () => {
     }`;
     try {
       const res = await axios.post(imgeLoadUrl, formData);
-      console.log(res.data);
+     
       if (res.data.success) {
         const imgUrl = res.data.data.url;
         setProfilePic(imgUrl);

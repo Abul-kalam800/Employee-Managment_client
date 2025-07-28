@@ -18,7 +18,7 @@ const Header = () => {
   const hanldeLogout = () => {
     logOut()
     .then(() => {
-      console.log("log-out successfully");
+     
       setLogopen(false)
     })
     .catch(error=>{
