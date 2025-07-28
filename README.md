@@ -1,12 +1,47 @@
-# React + Vite
+# Employee Management System
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern and responsive Employee Management web application built using **React.js**, **Tailwind CSS**, **Node.js**, **Express**, and **MongoDB**.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🔐 Admin Access
 
-## Expanding the ESLint configuration
+- **Username (Email)**:azad123@gmail.com 
+- **Password**: Azad123#
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+
+
+---
+
+## 🌐 Live Site
+
+🔗 [Employee-Managment](https://employee-managment-493b0.web.app/)
+
+---
+
+## 🚀 Key Features
+
+- 🔐 **Secure Authentication** using Firebase (JWT based login)
+- 🧑‍💼 **Role-Based Access** (Admin, HR, and Employee with different permissions)
+- 📄 **Employee Work Submission** with date, description, and daily log
+- ✅ **HR Approval System** for verifying employees
+- 💸 **Salary Payment Management** with history records and status
+- 📊 **Work Reports Filtering** by employee, month, and year
+- 🛑 **Firing System** for Admin to disable logins for fired users (without deletion)
+- 📅 **Dynamic Year/Month Dropdowns** for filtering reports or payments
+- 👁️ **Responsive UI** optimized for desktop and mobile using Tailwind CSS 
+- 🧩 **Modular Components** and reusable hooks for clean, maintainable code
+
+---
+
+## 🛠️ Tech Stack
+
+- **Frontend**: React.js, Tailwind CSS
+- **Backend**: Node.js, Express.js
+- **Database**: MongoDB 
+- **Auth**: Firebase Authentication + JWT
+- **Deployment**: Firebase (Frontend), Render/Vercel (Backend)
+
+---
+
+## 📁 Project Structure (Frontend)
