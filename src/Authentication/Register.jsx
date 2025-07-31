@@ -2,11 +2,11 @@ import React, { use, useState } from "react";
 import { Form, useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router";
 import useAuth from "../Hook/useAuth";
-import axios, { Axios } from "axios";
 import useAxios from "../Hook/useAxios";
 import Swal from "sweetalert2";
 import { FcGoogle } from "react-icons/fc";
 import { GoogleAuthProvider } from "firebase/auth";
+import axios from "axios";
 
 const Register = () => {
   const { user, creatUser, userProfile, signwithGoogle } = useAuth();
@@ -56,18 +56,17 @@ const Register = () => {
         );
 
         navigation("/");
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Your work has been saved",
+          showConfirmButton: false,
+          timer: 1500,
+        });
       })
       .catch((error) => {
         console.log(error.message);
       });
-
-    Swal.fire({
-      position: "center",
-      icon: "success",
-      title: "Your work has been saved",
-      showConfirmButton: false,
-      timer: 1500,
-    });
   };
 
   //gogle sign in
@@ -79,7 +78,10 @@ const Register = () => {
           email: result.user.email,
           photo: result.user.photoURL,
         };
-        await axios.post("https://employee-managment-server-three.vercel.app/social-login", userData);
+        await axios.post(
+          "https://employee-managment-server-three.vercel.app/social-login",
+          userData
+        );
         Swal.fire({
           position: "center",
           icon: "success",
