@@ -51,7 +51,7 @@ const Register = () => {
         };
 
         await axios.post(
-          "https://employee-managment-server-three.vercel.app//users",
+          "https://employee-managment-server-three.vercel.app/users",
           userInfo
         );
 
