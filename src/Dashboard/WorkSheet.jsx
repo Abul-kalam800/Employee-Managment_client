@@ -191,7 +191,11 @@ const WorkSheet = () => {
       </div>
 
       {/* Table */}
-      <div className="overflow-x-auto">
+      {works.length <1 ?
+     <> 
+     <p className="w-full text-center my-10 px-5 font-semibold text-2xl">You are new employee  You don't have any data , Please add data </p>
+     </>:<>
+     <div className="overflow-x-auto">
         <table className="min-w-full table-auto border">
           <thead>
             <tr className="bg-purple-600 text-white">
@@ -289,6 +293,8 @@ const WorkSheet = () => {
           </div>
         )}
       </div>
+     </>  
+    }
     </div>
   );
 };
