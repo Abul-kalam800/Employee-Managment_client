@@ -25,7 +25,7 @@ const Dashboard = () => {
   const { user, logOut } = useAuth();
   const handleClose = () => setIsOpen(false);
   const [logOpen, setLogOpen] = useState(false);
-  const { role, isLoading } = useUserRole();
+  const { role, isLoading ,loading } = useUserRole();
 
   const hanldeLogout = () => {
     setLogOpen(!logOpen);
@@ -98,7 +98,7 @@ const Dashboard = () => {
                 </li>
               </NavLink>
 
-              {!isLoading && role === "Employee" && (
+              {!loading && role === "Employee" && (
                 <>
                   <NavLink to="/dashboard/worksheet">
                     <li className="text-lg text-white flex items-center gap-2">
@@ -114,7 +114,7 @@ const Dashboard = () => {
                 </>
               )}
 
-              {!isLoading && role === "Hr" && (
+              {!loading && role === "Hr" && (
                 <>
                   <NavLink to="/dashboard/employeeList">
                     <li className="text-lg text-white flex items-center gap-2">
@@ -130,7 +130,7 @@ const Dashboard = () => {
                 </>
               )}
 
-              {!isLoading && role === "admin" && (
+              {!loading && role === "admin" && (
                 <>
                   <NavLink to="/dashboard/verifiedallemployee">
                     <li className="text-lg text-white flex items-center gap-2">

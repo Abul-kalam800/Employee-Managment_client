@@ -4,7 +4,7 @@ import useAxios from "./useAxios";
 
 const useUserRole = () => {
   const { user, loading } = useAuth();
- const axioesInstance = useAxios();
+  const axioesInstance = useAxios();
 
   const { data: role, isLoading } = useQuery({
     enabled: !!user?.email && !loading, // Query fires only if user email is ready
@@ -14,9 +14,8 @@ const useUserRole = () => {
       return res?.data?.role;
     },
   });
-  
 
-  return { role , isLoading ,loading };
+  return { role, isLoading, loading };
 };
 
 export default useUserRole;

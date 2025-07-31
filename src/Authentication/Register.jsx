@@ -2,7 +2,6 @@ import React, { use, useState } from "react";
 import { Form, useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router";
 import useAuth from "../Hook/useAuth";
-import useAxios from "../Hook/useAxios";
 import Swal from "sweetalert2";
 import { FcGoogle } from "react-icons/fc";
 import { GoogleAuthProvider } from "firebase/auth";
@@ -11,7 +10,7 @@ import axios from "axios";
 const Register = () => {
   const { user, creatUser, userProfile, signwithGoogle } = useAuth();
   const [profilePic, setProfilePic] = useState();
-  const axioesInstance = useAxios();
+
   const providerGoogle = new GoogleAuthProvider();
   const navigation = useNavigate();
   const {
