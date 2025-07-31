@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 
 import { NavLink, Outlet } from "react-router";
@@ -26,6 +26,8 @@ const Dashboard = () => {
   const handleClose = () => setIsOpen(false);
   const [logOpen, setLogOpen] = useState(false);
   const { role, isLoading } = useUserRole();
+ 
+
 
   const hanldeLogout = () => {
     setLogOpen(!logOpen);

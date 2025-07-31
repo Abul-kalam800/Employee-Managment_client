@@ -20,6 +20,7 @@ import Forbidden from "../Pages/forbiddenPage/Forbidden";
 import AdminRouter from "../PrivetRouter/adminRouter/AdminRouter";
 import ErrorPage from "../Pages/Error404page/ErrorPage";
 import HrRouter from "../PrivetRouter/hrRouter/HrRouter";
+import EmployeeRouter from "../PrivetRouter/employeeRouter/EmployeeRouter";
 
 export const router = createBrowserRouter([
   {
@@ -69,7 +70,8 @@ export const router = createBrowserRouter([
       },
       {
         path: "worksheet",
-        Component: WorkSheet,
+        // Component: WorkSheet,
+        element:<EmployeeRouter><WorkSheet></WorkSheet></EmployeeRouter>
       },
       {
         path: "employeeList",
@@ -79,7 +81,8 @@ export const router = createBrowserRouter([
       {
         path: "paymenthistory",
 
-        Component: PaymentHistory,
+        // Component: PaymentHistory,
+        element:<EmployeeRouter><PaymentHistory></PaymentHistory></EmployeeRouter>
       },
       {
         path: "employeedetails/:id",
