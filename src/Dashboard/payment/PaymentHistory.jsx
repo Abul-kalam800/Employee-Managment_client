@@ -37,6 +37,12 @@ const PaymentHistory = () => {
         hr
       </p>
 
+        {data.payments.length <1 ? <>
+         <p className="my-10 px-5 w-full text-center text-lg md:text-2xl font-semibold">
+          Sorry! You are not getting any salary after get salary then you see your payment history 
+
+         </p>
+          </>:<>
         <div className="mt-6 px-10 ">
           <div className="overflow-x-auto">
             <table className="w-full border text-left">
@@ -87,6 +93,8 @@ const PaymentHistory = () => {
             </button>
           </div>
         </div>
+        
+        </>}
      
     </>
   );
