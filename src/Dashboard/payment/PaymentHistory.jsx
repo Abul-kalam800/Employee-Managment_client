@@ -12,7 +12,7 @@ const PaymentHistory = () => {
   
   const axioesInstance = useAxios();
   const [page, setPage] = useState(1);
-  const { data, isLoading } = useQuery({
+  const { data: payments=[], isLoading } = useQuery({
     queryKey: ["paymentHistoty", email, page],
     queryFn: async () => {
       const res = await axioesInstance.get(
@@ -37,8 +37,8 @@ const PaymentHistory = () => {
         hr
       </p>
 
-        {data.payments.length <1 ? <>
-         <p className="my-10 px-5 w-full text-center text-lg md:text-2xl font-semibold">
+        {payments.length <1 ? <>
+         <p className="my-10 px-5 w-full text-center text-lg md:text-2xl font-semibold text-blue-400">
           Sorry! You are not getting any salary after get salary then you see your payment history 
 
          </p>
@@ -55,7 +55,7 @@ const PaymentHistory = () => {
                 </tr>
               </thead>
               <tbody>
-                {data.payments.map((payment) => (
+                {payments.map((payment) => (
                   <tr key={payment._id}>
                     <td className="border px-2 py-1">{payment.month}</td>
                     <td className="border px-2 py-1">{payment.year}</td>

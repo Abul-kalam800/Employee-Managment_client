@@ -193,7 +193,7 @@ const WorkSheet = () => {
       {/* Table */}
       {works.length <1 ?
      <> 
-     <p className="w-full text-center my-10 px-5 font-semibold text-2xl">You are new employee  You don't have any data , Please add data </p>
+     <p className="w-full text-center my-10 px-5 font-semibold text-2xl text-blue-400">You are new employee  You don't have any data , Please add data </p>
      </>:<>
      <div className="overflow-x-auto">
         <table className="min-w-full table-auto border">
