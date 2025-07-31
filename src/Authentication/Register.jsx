@@ -40,11 +40,11 @@ const Register = () => {
         // user info
         const userInfo = {
           email,
-          name: result.data.name,
-          bank_account: result.data.Account,
-          salary: parseInt(result.data.Salary),
-          role: result.data.Role,
-          Desiganation: result.data.Desigation,
+          name: data.name,
+          bank_account: data.Account,
+          salary: parseInt(data.Salary),
+          role: data.Role,
+          Desiganation: data.Desigation,
           photo: profilePic,
           isVarified: false,
           status: "pending",
