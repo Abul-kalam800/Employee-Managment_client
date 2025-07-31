@@ -4,6 +4,7 @@ import { useState } from "react";
 import useAxios from "../../Hook/useAxios";
 import useAuth from "../../Hook/useAuth";
 import LoadingSpnieer from "../../Pages/spinnerPage/LoadingSpnieer";
+import axios from "axios";
 
 const PaymentHistory = () => {
   const { user } = useAuth();
@@ -15,12 +16,12 @@ const PaymentHistory = () => {
     queryKey: ["paymentHistoty", email, page],
     queryFn: async () => {
       const res = await axioesInstance.get(
-        `/paymentHistory?email=${email}&&page=${page}`
+        `paymentHistory?email=${email}&&page=${page}`
       );
+    
       return res.data;
     },
   });
-
   if (isLoading) return <LoadingSpnieer></LoadingSpnieer>;
 
   return (
@@ -35,7 +36,7 @@ const PaymentHistory = () => {
         hr
       </p>
 
-      {data.payments.length < 1 ? (
+      {data.payments.length == 0 ? (
         <>
           <p className="my-10 px-5 w-full text-center text-lg md:text-2xl font-semibold text-blue-400">
             Sorry! You are not getting any salary after get salary then you see
