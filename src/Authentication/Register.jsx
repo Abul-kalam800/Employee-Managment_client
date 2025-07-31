@@ -40,29 +40,29 @@ const Register = () => {
         // user info
         const userInfo = {
           email,
-          name: data.name,
-          bank_account: data.Account,
-          salary: parseInt(data.Salary),
-          role: data.Role,
-          Desiganation: data.Desigation,
+          name: result.data.name,
+          bank_account: result.data.Account,
+          salary: parseInt(result.data.Salary),
+          role: result.data.Role,
+          Desiganation: result.data.Desigation,
           photo: profilePic,
           isVarified: false,
           status: "pending",
         };
 
         await axios.post(
-          "https://employee-managment-server-three.vercel.app/",
+          "https://employee-managment-server-three.vercel.app//users",
           userInfo
         );
 
-        navigation("/");
         Swal.fire({
           position: "center",
           icon: "success",
-          title: "Your work has been saved",
+          title: "Your successfully registerd",
           showConfirmButton: false,
           timer: 1500,
         });
+        navigation("/");
       })
       .catch((error) => {
         console.log(error.message);
