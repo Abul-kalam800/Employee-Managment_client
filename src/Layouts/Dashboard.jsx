@@ -26,8 +26,6 @@ const Dashboard = () => {
   const handleClose = () => setIsOpen(false);
   const [logOpen, setLogOpen] = useState(false);
   const { role, isLoading } = useUserRole();
- 
-
 
   const hanldeLogout = () => {
     setLogOpen(!logOpen);
@@ -100,17 +98,21 @@ const Dashboard = () => {
                 </li>
               </NavLink>
 
-              <NavLink to="/dashboard/worksheet">
-                <li className="text-lg text-white flex items-center gap-2">
-                  <HiClipboardList /> Employee-Work-Sheet
-                </li>
-              </NavLink>
+              {!isLoading && role === "Employee" && (
+                <>
+                  <NavLink to="/dashboard/worksheet">
+                    <li className="text-lg text-white flex items-center gap-2">
+                      <HiClipboardList /> Employee-Work-Sheet
+                    </li>
+                  </NavLink>
 
-              <NavLink to="/dashboard/paymenthistory">
-                <li className="text-lg text-white flex items-center gap-2">
-                  <HiCurrencyDollar /> Payment-History
-                </li>
-              </NavLink>
+                  <NavLink to="/dashboard/paymenthistory">
+                    <li className="text-lg text-white flex items-center gap-2">
+                      <HiCurrencyDollar /> Payment-History
+                    </li>
+                  </NavLink>
+                </>
+              )}
 
               {!isLoading && role === "Hr" && (
                 <>
