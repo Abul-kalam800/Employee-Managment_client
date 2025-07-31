@@ -49,20 +49,24 @@ const Register = () => {
           status: "pending",
         };
 
-        await axios.post(
-          "https://employee-managment-server-three.vercel.app/users",
-          userInfo
-        );
+       try{
+         await axios.post("https://employee-managment-server-three.vercel.app/users",userInfo);
+         
+         Swal.fire({
+           position: "center",
+           icon: "success",
+           title: "Your successfully registerd",
+           showConfirmButton: false,
+           timer: 1500,
+          });
+          navigation("/");
+          // console.log('register is done')
+       
+      }catch(error){
+        console.log("error message not register",error.message)
 
-        Swal.fire({
-          position: "center",
-          icon: "success",
-          title: "Your successfully registerd",
-          showConfirmButton: false,
-          timer: 1500,
-        });
-        navigation("/");
-      })
+      }
+    })
       .catch((error) => {
         console.log(error.message);
       });
