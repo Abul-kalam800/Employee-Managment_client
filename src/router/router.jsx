@@ -21,6 +21,7 @@ import AdminRouter from "../PrivetRouter/adminRouter/AdminRouter";
 import ErrorPage from "../Pages/Error404page/ErrorPage";
 import HrRouter from "../PrivetRouter/hrRouter/HrRouter";
 import EmployeeRouter from "../PrivetRouter/employeeRouter/EmployeeRouter";
+import TermsAndConditions from "../Componets/TermsAndConditions";
 
 export const router = createBrowserRouter([
   {
@@ -51,6 +52,10 @@ export const router = createBrowserRouter([
       {
         path: "/register",
         Component:Register,
+      },
+      {
+        path:'/tramsandcondition',
+        Component:TermsAndConditions
       },
      
     ],
