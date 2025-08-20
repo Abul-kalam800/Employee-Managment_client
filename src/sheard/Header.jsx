@@ -26,7 +26,7 @@ const Header = () => {
   };
 
   return (
-    <header className="p-2 bg-gray-200 text-gray-800 px-5">
+    <header className="p-2 bg-primary-900 text-neutral-300 fixed top-0 left-0 w-full px-5 z-50">
       <div className="container flex justify-between h-12 mx-auto">
         <Logo></Logo>
 
@@ -102,7 +102,7 @@ const Header = () => {
         </div>
         {open ? (
           <>
-            <ul className="absolute top-16 right-0 bg-blue-300 py-5 ">
+            <ul className="absolute top-16 right-0 bg-indigo-800 py-5 ">
               <li>
                 <NavLink
                   to="/dashboard"

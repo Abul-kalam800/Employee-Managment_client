@@ -4,9 +4,9 @@ import banner from "../../assets/banner1.png";
 const Banner = () => {
   return (
     <section className="dark:bg-gray-100 dark:text-gray-800">
-      <div className="container flex flex-col justify-center p-6 gap-10 mx-auto sm:py-12 lg:py-24 lg:flex-row lg:justify-between">
+      <div className="container flex flex-col justify-center p-6 gap-10 mx-auto sm:py-12 lg:py-24 lg:flex-row lg:justify-between mt-20">
         <div className="flex flex-col justify-center  text-center rounded-sm lg:max-w-lg  lg:text-left">
-          <h1 className=" font-bold  text-5xl md:text-6xl text-center lg:text-left ">
+          <h1 className=" font-bold  text-4xl md:text-6xl text-center lg:text-left ">
             Empowering Teams, Simplifying
             <span className="dark:text-violet-600 "> Management</span>
           </h1>
