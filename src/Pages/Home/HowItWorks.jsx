@@ -32,10 +32,10 @@ const steps = [
 
 const HowItWorks = () => {
   return (
-    <section className="py-16 bg-gray-200 mt-20">
+    <section className="py-16 bg-gray-200 mt-20 rounded-2xl">
       <div className="max-w-7xl mx-auto px-6 text-center">
         {/* Heading */}
-        <h2 className="text-3xl font-bold text-gray-800 mb-6">How It Works</h2>
+        <h2 className="text-3xl md:text-5xl font-bold text-gray-800 mb-6">How It <span className="text-[#6600CC]"> Works</span></h2>
         <p className="text-gray-600 mb-12">
           Our Employee Management System makes HR tasks simple and effective in just a few steps.
         </p>

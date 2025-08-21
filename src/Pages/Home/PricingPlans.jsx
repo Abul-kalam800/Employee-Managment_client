@@ -19,7 +19,7 @@ const plans = [
       "Leave & Performance Tracking",
       "Priority Support",
     ],
-    highlight: false, // special styling
+  
   },
   {
     name: "Enterprise",
@@ -35,9 +35,9 @@ const plans = [
 
 const PricingPlans = () => {
   return (
-    <section className="py-16 bg-gray-50">
+    <section className="py-16 bg-gray-100 rounded-2xl">
       <div className="max-w-7xl mx-auto px-4 text-center">
-        <h2 className="text-3xl font-bold text-gray-800 mb-6">Pricing Plans</h2>
+        <h2 className="text-3xl md:text-5xl font-bold text-gray-800 mb-6"><span className="text-[#6600CC]"> Pricing</span> Plans</h2>
         <p className="text-gray-600 mb-12">
           Choose the plan that fits your team's needs.
         </p>
@@ -46,11 +46,9 @@ const PricingPlans = () => {
           {plans.map((plan, index) => (
             <div
               key={index}
-              className={`p-8 rounded-2xl shadow-md transition duration-300 ${
-                plan.highlight
-                  ? "bg-blue-600 text-white scale-105"
-                  : "bg-white text-gray-800"
-              }`}
+              className={`p-8 rounded-2xl shadow-md transition duration-300 
+               bg-white text-gray-800 hover:bg-indigo-400 hover:-translate-y-3 hover:transition-transform 
+              `}
             >
               <h3 className="text-xl font-semibold mb-4">{plan.name}</h3>
               <p className="text-3xl font-bold mb-6">{plan.price}</p>
@@ -64,11 +62,9 @@ const PricingPlans = () => {
               </ul>
 
               <button
-                className={`w-full py-2 rounded-lg font-semibold transition mt-auto ${
-                  plan.highlight
-                    ? "bg-white text-blue-600 hover:bg-gray-100"
-                    : "bg-blue-600 text-white hover:bg-blue-700"
-                }`}
+                className={`w-full py-2 rounded-lg font-semibold transition mt-auto 
+                 bg-[#6600CC] text-white hover:bg-[#00CC33] duration-300
+                `}
               >
                 Get Started
               </button>

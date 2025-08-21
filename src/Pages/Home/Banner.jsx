@@ -1,12 +1,13 @@
 import React from "react";
 import banner from "../../assets/banner1.png";
+import { Link } from "react-router";
 
 const Banner = () => {
   return (
-    <section className="dark:bg-gray-100 dark:text-gray-800">
-      <div className="container flex flex-col justify-center p-6 gap-10 mx-auto sm:py-12 lg:py-24 lg:flex-row lg:justify-between mt-20">
+    <section className="dark:bg-gray-100 dark:text-gray-800 rounded-2xl ">
+      <div className="container  md:h-[550px] flex flex-col justify-center p-6 gap-10 mx-auto sm:py-12 lg:py-24 lg:flex-row lg:justify-between mt-20 ">
         <div className="flex flex-col justify-center  text-center rounded-sm lg:max-w-lg  lg:text-left">
-          <h1 className=" font-bold  text-4xl md:text-6xl text-center lg:text-left ">
+          <h1 className=" font-bold  text-3xl md:text-6xl text-center lg:text-left ">
             Empowering Teams, Simplifying
             <span className="dark:text-violet-600 "> Management</span>
           </h1>
@@ -16,20 +17,25 @@ const Banner = () => {
             specifiq field where they need.
           </p>
           <div className="flex flex-col space-y-4 sm:items-center sm:justify-center sm:flex-row sm:space-y-0 sm:space-x-4 lg:justify-start">
-            <a
-              rel="noopener noreferrer"
-              href="#"
-              className="px-8 py-3 text-lg font-semibold rounded dark:bg-violet-600 dark:text-gray-50"
+            <Link
+              to="/aboutus"
+              className="px-8 py-3 text-lg  rounded btn bg-[#00CC33]  hover:bg-[#6600CC]"
+            >
+              About us
+            </Link>
+            <Link
+              to="/contactus"
+              className="px-8 py-3 text-lg  rounded btn border-2 border-[#6600CC]  hover:bg-[#00CC33]"
             >
               Contact us
-            </a>
+            </Link>
           </div>
         </div>
-        <div className="flex items-center justify-center p-6 mt-8 lg:mt-0 h-72 sm:h-80 lg:h-96 xl:h-112 2xl:h-128">
+        <div className="flex items-center justify-center p-6 mt-3 lg:mt-0 h-52 sm:h-70 lg:h-76 xl:h-112">
           <img
             src={banner}
             alt=""
-            className="object-contain h-72 sm:h-80 lg:h-96 xl:h-112 2xl:h-128"
+            className="object-contain h-62 sm:h-70 lg:h-76 xl:h-92 "
           />
         </div>
       </div>

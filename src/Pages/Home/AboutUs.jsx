@@ -16,7 +16,7 @@ const AboutUs = () => {
 
         {/* Right Side - Content */}
         <div>
-          <h2 className="text-3xl font-bold text-gray-800 mb-6">About Us</h2>
+          <h2 className="text-3xl md:text-5xl font-bold text-gray-800 mb-6">About Us</h2>
           <p className="text-gray-600 mb-4">
             Our Employee Management System is designed to simplify HR tasks,
             payroll, attendance, and performance tracking in one seamless

@@ -22,6 +22,7 @@ import ErrorPage from "../Pages/Error404page/ErrorPage";
 import HrRouter from "../PrivetRouter/hrRouter/HrRouter";
 import EmployeeRouter from "../PrivetRouter/employeeRouter/EmployeeRouter";
 import TermsAndConditions from "../Componets/TermsAndConditions";
+import AboutUs from "../Pages/Home/AboutUs";
 
 export const router = createBrowserRouter([
   {
@@ -46,18 +47,21 @@ export const router = createBrowserRouter([
         ),
       },
       {
+        path: "/aboutus",
+        Component: AboutUs,
+      },
+      {
         path: "/login",
         Component: Login,
       },
       {
         path: "/register",
-        Component:Register,
+        Component: Register,
       },
       {
-        path:'/tramsandcondition',
-        Component:TermsAndConditions
+        path: "/tramsandcondition",
+        Component: TermsAndConditions,
       },
-     
     ],
   },
   {
@@ -76,18 +80,30 @@ export const router = createBrowserRouter([
       {
         path: "worksheet",
         // Component: WorkSheet,
-        element:<EmployeeRouter><WorkSheet></WorkSheet></EmployeeRouter>
+        element: (
+          <EmployeeRouter>
+            <WorkSheet></WorkSheet>
+          </EmployeeRouter>
+        ),
       },
       {
         path: "employeeList",
 
-        element: <HrRouter><EmployeeList></EmployeeList></HrRouter>,
+        element: (
+          <HrRouter>
+            <EmployeeList></EmployeeList>
+          </HrRouter>
+        ),
       },
       {
         path: "paymenthistory",
 
         // Component: PaymentHistory,
-        element:<EmployeeRouter><PaymentHistory></PaymentHistory></EmployeeRouter>
+        element: (
+          <EmployeeRouter>
+            <PaymentHistory></PaymentHistory>
+          </EmployeeRouter>
+        ),
       },
       {
         path: "employeedetails/:id",
@@ -95,7 +111,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "hrprogress",
-        element: <HrRouter><HrProgress></HrProgress></HrRouter>,
+        element: (
+          <HrRouter>
+            <HrProgress></HrProgress>
+          </HrRouter>
+        ),
       },
       {
         path: "verifiedallemployee",

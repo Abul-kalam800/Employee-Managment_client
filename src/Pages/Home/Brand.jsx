@@ -15,7 +15,7 @@ const brandLogos = [
 const Brand = () => {
   return (
     <section className="py-20 bg-white">
-      <h2 className="text-4xl font-bold text-center mb-16">Our Trusted Partners</h2>
+      <h2 className="text-3xl md:text-5xl font-bold text-center mb-16">Our Trusted <span className="text-[#6600CC]"> Patners</span></h2>
       <div className="max-w-6xl mx-auto px-4">
         <Swiper
           modules={[Autoplay]}

@@ -32,13 +32,35 @@ const Header = () => {
 
         <ul className="items-stretch hidden space-x-3 lg:flex">
           <li className="flex">
-            <NavLink to="/dashboard" className="flex items-center px-4 -mb-1">
+            <NavLink
+              to="/"
+              className="flex items-center px-4 -mb-1 hover:text-[#6600CC]"
+            >
+              Home
+            </NavLink>
+          </li>
+          <li className="flex">
+            <NavLink
+              to="/dashboard"
+              className="flex items-center px-4 -mb-1 hover:text-[#6600CC]"
+            >
               Dashboard
             </NavLink>
           </li>
           <li className="flex">
-            <NavLink to="/contactus" className="flex items-center px-4 -mb-1">
+            <NavLink
+              to="/contactus"
+              className="flex items-center px-4 -mb-1 hover:text-[#6600CC]"
+            >
               Contact us
+            </NavLink>
+          </li>
+          <li className="flex">
+            <NavLink
+              to="/aboutus"
+              className="flex items-center px-4 -mb-1 hover:text-[#6600CC]"
+            >
+              About us
             </NavLink>
           </li>
         </ul>
@@ -67,7 +89,7 @@ const Header = () => {
               <div className="items-center flex-shrink-0 justify-center lg:flex gap-5">
                 <Link
                   to="/login"
-                  className="self-center px-8 py-3 rounded btn  hover:bg-[#00CC33]"
+                  className="self-center px-8 py-3 rounded btn border-2 border-[#6600CC]  hover:bg-[#00CC33]"
                   fdprocessedid="5all7o"
                 >
                   Login
@@ -102,7 +124,15 @@ const Header = () => {
         </div>
         {open ? (
           <>
-            <ul className="absolute top-16 right-0 bg-indigo-800 py-5 ">
+            <ul className="absolute top-16 right-0 bg-indigo-800 py-5 w-9/12 h-svh z-50 ">
+              <li>
+                <NavLink
+                  to="/"
+                  className="flex items-center px-4 mb-4"
+                >
+                Home
+                </NavLink>
+              </li>
               <li>
                 <NavLink
                   to="/dashboard"
@@ -112,8 +142,16 @@ const Header = () => {
                 </NavLink>
               </li>
               <li className="flex">
-                <NavLink to="/contactus" className="flex items-center px-4 ">
+                <NavLink
+                  to="/contactus"
+                  className="flex items-center px-4 mb-4 "
+                >
                   Contact us
+                </NavLink>
+              </li>
+              <li className="flex">
+                <NavLink to="/aboutus" className="flex items-center px-4 ">
+                  About us
                 </NavLink>
               </li>
             </ul>
