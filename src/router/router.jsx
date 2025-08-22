@@ -23,6 +23,8 @@ import HrRouter from "../PrivetRouter/hrRouter/HrRouter";
 import EmployeeRouter from "../PrivetRouter/employeeRouter/EmployeeRouter";
 import TermsAndConditions from "../Componets/TermsAndConditions";
 import AboutUs from "../Pages/Home/AboutUs";
+import Overview from "../Dashboard/overview/Overview";
+import ProfielPage from "../Dashboard/profielPage/ProfielPage";
 
 export const router = createBrowserRouter([
   {
@@ -76,6 +78,14 @@ export const router = createBrowserRouter([
       {
         index: true,
         Component: DashboardBanner,
+      },
+      {
+        path:"overview",
+        Component:Overview
+      },
+      {
+        path:'profilepage',
+        Component:ProfielPage,
       },
       {
         path: "worksheet",

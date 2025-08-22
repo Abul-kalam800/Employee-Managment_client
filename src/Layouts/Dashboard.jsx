@@ -97,6 +97,16 @@ const Dashboard = () => {
                   <HiHome /> Home
                 </li>
               </NavLink>
+              <NavLink to="/dashboard/overview">
+                <li className="text-lg text-white flex items-center gap-2">
+                  <HiHome /> OverView
+                </li>
+              </NavLink>
+              <NavLink to="/dashboard/profilepage">
+                <li className="text-lg text-white flex items-center gap-2">
+                  <HiHome /> Profile
+                </li>
+              </NavLink>
 
               {!loading && role === "Employee" && (
                 <>
