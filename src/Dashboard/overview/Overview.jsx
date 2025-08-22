@@ -11,7 +11,7 @@ const Overview=()=>{
   const axioesInstance= useAxios();
 
   useEffect(() => {
-        axios.get("http://localhost:5000/overview")
+        axios.get("https://employee-managment-server-three.vercel.app/overview")
       .then(res => setData(res.data))
       .catch(err => console.error(err));
   }, []);

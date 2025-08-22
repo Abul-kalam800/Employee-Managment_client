@@ -13,7 +13,7 @@ const ProfielPage = () => {
     
     
     useEffect(() => {
-    axios.get(`http://localhost:5000/profile/${user.email}`)
+    axios.get(`https://employee-managment-server-three.vercel.app/profile/${user.email}`)
       .then(res =>setProfile (res.data))
       .catch(err => console.error(err));
   }, []);
