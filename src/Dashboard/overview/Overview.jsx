@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from "recharts";
 import useAxios from "../../Hook/useAxios";
 import axios from "axios";
+import LoadingSpnieer from "../../Pages/spinnerPage/LoadingSpnieer";
 
 const Overview=()=>{ 
   const [data, setData] = useState(null);
@@ -16,7 +17,7 @@ const Overview=()=>{
   }, []);
   console.log(data)
 
-  if (!data) return <p className="text-center">Loading...</p>;
+  if (!data) return <LoadingSpnieer></LoadingSpnieer>;
 
   const chartData = [
     { name: "Users", value: data.totalUsers },
